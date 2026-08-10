@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="ne" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MSR — Make Someone Rise | Hope & Help</title>
+
+    <!-- SEO & Metadata -->
+    <meta name="description" content="MSR — Make Someone Rise मार्फत आवश्यकतामा रहेका नेपालीहरूलाई सहयोग गर्न आफ्नो सानो योगदान गर्नुहोस्।">
+    <meta name="theme-color" content="#166534">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://msr.com.np/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://msr.com.np/">
+    <meta property="og:title" content="MSR — Make Someone Rise | Hope & Help">
+    <meta property="og:description" content="Your small contribution can become a powerful force that helps someone rise again.">
+
+    <!-- Fonts: Inter, Poppins & Noto Sans Devanagari -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            950: '#052e16',
+                        },
+                        accent: '#f4b942',
+                        bodybg: '#f8faf9',
+                        borderline: '#e3e9e5'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans Devanagari', 'sans-serif'],
+                        heading: ['Poppins', 'Noto Sans Devanagari', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Client-Side QRCode.js Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" xintegrity="sha512-CNgIRecGo7OffLvhbDirectC2NUN9C8483b3eT63a2+6w33fCj32pDqD5tE+4qU8x5lA15g5211b43950=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        :root {
+            --primary: #166534;
+            --primary-dark: #14532d;
+            --accent: #f4b942;
+            --bg-surface: #f8faf9;
+            --text-dark: #17201a;
+            --border-line: #e3e9e5;
+        }
+
+        body {
+            background-color: var(--bg-surface);
+            color: var(--text-dark);
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+            padding-bottom: 75px;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding-bottom: 0px;
+            }
+        }
+
+        button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .view-step {
+            transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+        }
+
+        .view-hidden {
+            display: none !important;
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        .view-active {
+            display: block !important;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #qrcode-canvas-target img, #qrcode-canvas-target canvas {
+            margin: 0 auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        /* Modal Blur Effect */
+        .modal-blur-active {
+            filter: blur(6px);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .btn-black-pill {
+            display: inline-flex;
+            width: fit-content;
+            margin: 0 auto;
+            background-color: #000000;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s;
+        }
+        .btn-black-pill:hover {
+            opacity: 0.85;
+        }
+
+        /* ========================================== */
+        /* MSR 2D GRAPHIC PRELOADER STYLES            */
+        /* ========================================== */
+        #page-preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: #052e16;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease-out, visibility 0.4s ease-out;
+        }
+
+        #page-preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .msr-graphic-container {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .msr-pulse-ring {
+            position: absolute;
+            inset: -10px;
+            border: 2px solid rgba(244, 185, 66, 0.3);
+            border-radius: 24px;
+            animation: msrPulse 2s infinite ease-out;
+        }
+
+        .msr-core-box {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #166534, #14532d);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            animation: msrBounce 1.5s infinite ease-in-out alternate;
+        }
+
+        .msr-core-box svg {
+            width: 38px;
+            height: 38px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .msr-rising-spark {
+            position: absolute;
+            bottom: 8px;
+            width: 6px;
+            height: 6px;
+            background: #f4b942;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #f4b942;
+            animation: msrRise 1.2s infinite cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .preloader-text {
+            margin-top: 20px;
+            color: #dcfce7;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            animation: textGlow 1.5s infinite alternate;
+        }
+
+        @keyframes msrPulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 0.2; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        @keyframes msrBounce {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-6px) rotate(1deg); }
+        }
+
+        @keyframes msrRise {
+            0% { transform: translateY(0) scale(0.5); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-35px) scale(1.2); opacity: 0; }
+        }
+
+        @keyframes textGlow {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-100 selection:text-brand-900 antialiased">
+
+    <!-- ========================================== -->
+    <!-- MSR 2D GRAPHIC PRELOADER                   -->
+    <!-- ========================================== -->
+    <div id="page-preloader">
+        <div class="msr-graphic-container">
+            <div class="msr-pulse-ring"></div>
+            <div class="msr-core-box">
+                <!-- Inline Graphic Icon -->
+                <svg class="fill-none stroke-current stroke-2 text-accent" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                    <path d="M6 10c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v3a1 1 0 0 1-1 1h-2v6a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-6H7a1 1 0 0 1-1-1v-3z"/>
+                    <path d="M12 12l3-3m-6 0l3 3" class="stroke-emerald-300"/>
+                </svg>
+                <div class="msr-rising-spark"></div>
+            </div>
+        </div>
+        <div class="preloader-text">MSR — Make Someone Rise</div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- HEADER / BRAND HEADER                      -->
+    <!-- ========================================== -->
+    <header id="site-header" class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-borderline shadow-sm transition-all">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            
+            <a href="#home" onclick="appState.navigateToSection('home')" class="flex items-center gap-2.5 focus:outline-none group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-800 to-brand-950 flex items-center justify-center text-white shadow-md shadow-brand-900/20 group-hover:scale-105 transition-transform shrink-0">
+                    <svg class="w-5 h-5 fill-none stroke-current stroke-2 text-accent" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+                        <path d="M6 10c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v3a1 1 0 0 1-1 1h-2v6a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-6H7a1 1 0 0 1-1-1v-3z"/>
+                        <path d="M12 12l3-3m-6 0l3 3" class="stroke-emerald-300"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="font-heading font-extrabold text-lg sm:text-xl text-slate-900 block leading-none tracking-tight">
+                        MSR
+                    </span>
+                    <span class="text-[10px] font-semibold text-brand-800 tracking-wider uppercase block mt-0.5">
+                        Make Someone Rise
+                    </span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-6 text-xs sm:text-sm font-semibold text-slate-600">
+                <a href="#home" onclick="appState.navigateToSection('home')" class="hover:text-brand-800 transition-colors" data-i18n="navHome">गृह पृष्ठ</a>
+                <a href="#mission" onclick="appState.navigateToSection('mission')" class="hover:text-brand-800 transition-colors" data-i18n="navMission">उद्देश्य</a>
+                <a href="#programs" onclick="appState.navigateToSection('programs')" class="hover:text-brand-800 transition-colors" data-i18n="navPrograms">कार्यक्रमहरू</a>
+                <a href="#transparency" onclick="appState.navigateToSection('transparency')" class="hover:text-brand-800 transition-colors" data-i18n="navTransparency">पारदर्शिता</a>
+                <a href="#faq" onclick="appState.navigateToSection('faq')" class="hover:text-brand-800 transition-colors" data-i18n="navFaq">प्रश्न/उत्तर</a>
+            </nav>
+
+            <div class="flex items-center gap-2.5">
+                <div class="bg-slate-100 p-1 rounded-xl flex items-center border border-slate-200 text-xs font-bold shadow-inner">
+                    <button id="lang-btn-ne" onclick="appState.setLanguage('ne')" class="px-2.5 py-1 rounded-lg transition-all bg-brand-800 text-white shadow-sm">
+                        नेपाली
+                    </button>
+                    <button id="lang-btn-en" onclick="appState.setLanguage('en')" class="px-2.5 py-1 rounded-lg transition-all text-slate-600 hover:text-slate-900">
+                        English
+                    </button>
+                </div>
+
+                <button onclick="appState.startDonationFlow()" class="hidden md:inline-flex bg-brand-800 hover:bg-brand-900 text-white font-heading font-bold text-xs sm:text-sm px-4 py-2 rounded-xl shadow-md transition-all items-center gap-1.5">
+                    <svg class="w-4 h-4 fill-current text-accent" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <span data-i18n="navDonateBtn">सहयोग गर्नुहोस्</span>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- MAIN CONTENT WRAPPER                       -->
+    <!-- ========================================== -->
+    <main id="main-content-wrapper" class="flex-1 transition-all duration-300">
+
+        <!-- SECTION 1: HERO -->
+        <section id="home" class="relative py-10 md:py-16 bg-gradient-to-b from-brand-50/60 via-bodybg to-bodybg overflow-hidden border-b border-borderline">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="grid md:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="md:col-span-7 space-y-5 text-center md:text-left">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-100 border border-brand-200 text-brand-900 text-xs font-bold uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-brand-600 animate-pulse"></span>
+                            MSR — Make Someone Rise
+                        </span>
+
+                        <h1 class="text-2xl sm:text-4xl md:text-5xl font-heading font-extrabold text-slate-900 leading-tight whitespace-pre-line tracking-tight" data-i18n="heroHeading">
+                            तपाईंको सानो सहयोग,
+                            कसैको जीवन उठाउने ठूलो शक्ति बन्न सक्छ।
+                        </h1>
+
+                        <p class="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto md:mx-0 leading-relaxed" data-i18n="heroSubheading">
+                            आर्थिक तथा सामाजिक रूपमा कमजोर व्यक्ति र परिवारलाई आत्मनिर्भर र सम्मानजनक जीवनतर्फ अघि बढाउन सहयोग गर्नुहोस्।
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start pt-1">
+                            <button onclick="appState.startDonationFlow()" class="bg-brand-800 hover:bg-brand-900 text-white font-heading font-bold px-7 py-3.5 rounded-2xl shadow-lg shadow-brand-900/20 active:scale-[0.99] transition-all flex items-center justify-center gap-2 text-sm sm:text-base">
+                                <svg class="w-5 h-5 fill-current text-accent" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                <span data-i18n="heroCtaPrimary">अहिले सहयोग गर्नुहोस्</span>
+                            </button>
+                            <a href="#programs" onclick="appState.navigateToSection('programs')" class="bg-white hover:bg-slate-100 text-slate-700 font-bold px-6 py-3.5 rounded-2xl border border-slate-200 shadow-sm transition-all text-center text-sm sm:text-base" data-i18n="heroCtaSecondary">
+                                मुख्य कार्यक्रमहरू
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-5">
+                        <div class="bg-white rounded-3xl p-6 border border-borderline shadow-xl space-y-5 relative">
+                            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                    <span class="font-heading font-extrabold text-xs sm:text-sm text-slate-900">HOPE & HELP</span>
+                                </div>
+                                <span class="text-[11px] font-bold text-brand-800 bg-brand-50 px-2.5 py-0.5 rounded-full" data-i18n="initiativeTag">
+                                    मानवीय पहल
+                                </span>
+                            </div>
+
+                            <div class="p-5 rounded-2xl bg-gradient-to-br from-brand-900 to-brand-950 text-white space-y-2">
+                                <p class="text-[11px] font-bold text-accent uppercase tracking-wider" data-i18n="heroQuoteLabel">मुख्य सन्देश</p>
+                                <p class="text-xs sm:text-sm leading-relaxed text-emerald-100 font-medium" data-i18n="heroQuoteText">
+                                    “सानो सहयोग गरौँ, कसैलाई फेरि उठ्न मद्दत गरौँ।”
+                                </p>
+                            </div>
+
+                            <p class="text-xs text-slate-500 leading-relaxed text-center" data-i18n="heroDisclaimer">
+                                तपाईंको सानो स्वेच्छिक सहयोगले नेपालका असहाय तथा बिरामी व्यक्तिहरूलाई नयाँ जीवनको आशा दिन सक्छ।
+                            </p>
+
+                            <button onclick="appState.startDonationFlow()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl transition-colors text-xs sm:text-sm text-center" data-i18n="heroCardBtn">
+                                सहयोग अभियानमा जोडिनुहोस्
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MISSION -->
+        <section id="mission" class="py-12 bg-slate-50 border-b border-borderline">
+            <div class="max-w-4xl mx-auto px-4 text-center space-y-3">
+                <span class="text-xs font-bold text-brand-800 bg-brand-100 px-3 py-1 rounded-full uppercase tracking-wider" data-i18n="missionTag">
+                    MSR - Make Someone Rise
+                </span>
+                <h2 class="text-xl sm:text-3xl font-heading font-bold text-slate-900" data-i18n="missionTitle">
+                    हाम्रो उद्देश्य
+                </h2>
+                <p class="text-slate-700 font-medium text-xs sm:text-base leading-relaxed max-w-3xl mx-auto bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-sm" data-i18n="missionBody">
+                    आर्थिक तथा सामाजिक रूपमा कमजोर व्यक्ति र परिवारलाई शिक्षा, स्वास्थ्य, खाद्य सुरक्षा, आपतकालीन राहत, रोजगारी/सीप विकास तथा अन्य आवश्यक सहयोग उपलब्ध गराई आत्मनिर्भर र सम्मानजनक जीवनतर्फ अघि बढाउन सहयोग गर्ने।
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: PROGRAMS -->
+        <section id="programs" class="py-12 bg-white border-b border-borderline">
+            <div class="max-w-6xl mx-auto px-4 space-y-8">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <h2 class="text-xl sm:text-3xl font-heading font-bold text-slate-900" data-i18n="progTitle">
+                        मुख्य कार्यक्रमहरू
+                    </h2>
+                    <p class="text-slate-600 text-xs sm:text-sm" data-i18n="progSubtitle">
+                        तपाईंको स्वेच्छिक सहयोगबाट सञ्चालन हुने प्रमुख राहत तथा सशक्तीकरण कार्यक्रमहरू:
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-brand-800 transition-colors">
+                        <div class="w-8 h-8 rounded-xl bg-red-100 text-red-800 flex items-center justify-center font-bold text-sm">🏠</div>
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="prog1Title">Emergency Assistance</h3>
+                        <p class="text-[11px] text-slate-600 leading-tight" data-i18n="prog1Desc">आकस्मिक आर्थिक सहायता</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-brand-800 transition-colors">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-sm">🏥</div>
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="prog2Title">Medical Support</h3>
+                        <p class="text-[11px] text-slate-600 leading-tight" data-i18n="prog2Desc">उपचार/औषधि खर्चमा सहयोग</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-brand-800 transition-colors">
+                        <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center font-bold text-sm">🎓</div>
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="prog3Title">Education Support</h3>
+                        <p class="text-[11px] text-slate-600 leading-tight" data-i18n="prog3Desc">विद्यार्थीलाई scholarship</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-brand-800 transition-colors">
+                        <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-sm">🍚</div>
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="prog4Title">Food Support</h3>
+                        <p class="text-[11px] text-slate-600 leading-tight" data-i18n="prog4Desc">खाद्यान्न वितरण</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-brand-800 transition-colors">
+                        <div class="w-8 h-8 rounded-xl bg-indigo-100 text-indigo-800 flex items-center justify-center font-bold text-sm">👨‍👩‍👧</div>
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="prog5Title">Family Support</h3>
+                        <p class="text-[11px] text-slate-600 leading-tight" data-i18n="prog5Desc">विपन्न परिवारलाई सहयोग</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-brand-800 transition-colors">
+                        <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center font-bold text-sm">♿</div>
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="prog6Title">Disability Support</h3>
+                        <p class="text-[11px] text-slate-600 leading-tight" data-i18n="prog6Desc">अपाङ्गता भएका व्यक्तिलाई सहायता</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-brand-800 transition-colors">
+                        <div class="w-8 h-8 rounded-xl bg-orange-100 text-orange-800 flex items-center justify-center font-bold text-sm">👵</div>
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="prog7Title">Elderly Support</h3>
+                        <p class="text-[11px] text-slate-600 leading-tight" data-i18n="prog7Desc">ज्येष्ठ नागरिक सहयोग</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-brand-800 transition-colors">
+                        <div class="w-8 h-8 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center font-bold text-sm">🚨</div>
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="prog8Title">Disaster Relief</h3>
+                        <p class="text-[11px] text-slate-600 leading-tight" data-i18n="prog8Desc">बाढी, आगलागी, भूकम्प आदि</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-brand-800 transition-colors">
+                        <div class="w-8 h-8 rounded-xl bg-teal-100 text-teal-800 flex items-center justify-center font-bold text-sm">💼</div>
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="prog9Title">Skill Development</h3>
+                        <p class="text-[11px] text-slate-600 leading-tight" data-i18n="prog9Desc">सीप तथा रोजगारी सहयोग</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2 hover:border-brand-800 transition-colors">
+                        <div class="w-8 h-8 rounded-xl bg-cyan-100 text-cyan-800 flex items-center justify-center font-bold text-sm">🤝</div>
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-sm" data-i18n="prog10Title">Livelihood Support</h3>
+                        <p class="text-[11px] text-slate-600 leading-tight" data-i18n="prog10Desc">सानो व्यवसाय/आयआर्जन सहयोग</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: TRANSPARENCY -->
+        <section id="transparency" class="py-12 bg-white border-b border-borderline">
+            <div class="max-w-4xl mx-auto px-4 text-center space-y-5">
+                <h2 class="text-xl sm:text-3xl font-heading font-bold text-slate-900" data-i18n="transparencyTitle">
+                    हामी पारदर्शितामा विश्वास गर्छौँ
+                </h2>
+                <p class="text-slate-600 text-xs sm:text-sm max-w-xl mx-auto" data-i18n="transparencySubtitle">
+                    प्रत्येक प्राप्त सहयोगको अभिलेख सुरक्षित राखिन्छ र प्रमाणित प्रतिवेदन सार्वजनिक गरिन्छ।
+                </p>
+
+                <div class="grid grid-cols-3 gap-3 pt-2">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase" data-i18n="trCard1">प्राप्त सहयोग</span>
+                        <p class="text-xs sm:text-lg font-black text-brand-800">प्रमाणीकरण प्रणाली</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase" data-i18n="trCard2">वितरित राहत</span>
+                        <p class="text-xs sm:text-lg font-black text-brand-800">प्रत्यक्ष भुक्तानी</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-1">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase" data-i18n="trCard3">प्रशासनिक खर्च</span>
+                        <p class="text-xs sm:text-lg font-black text-brand-800">पारदर्शी दर</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: FAQS -->
+        <section id="faq" class="py-12 bg-slate-50 border-b border-borderline">
+            <div class="max-w-3xl mx-auto px-4 space-y-6">
+                <h2 class="text-xl sm:text-3xl font-heading font-bold text-slate-900 text-center" data-i18n="faqHeading">
+                    प्रायः सोधिने प्रश्नहरू (FAQs)
+                </h2>
+
+                <div class="space-y-3">
+                    <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-1.5">
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-base" data-i18n="faq1Q">म कसरी सहयोग गर्न सक्छु?</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" data-i18n="faq1A">तपाईंले वेबसाइटमा रहेको QR Scan गरी eSewa, Khalti वा बैंक ट्रान्सफर मार्फत स्वेच्छिक सहयोग पठाउन सक्नुहुन्छ।</p>
+                    </div>
+                    <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-1.5">
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-base" data-i18n="faq2Q">के म विदेशबाट सहयोग पठाउन सक्छु?</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" data-i18n="faq2A">हो, विदेशबाट सहयोग गर्न 'International Bank Transfer' माध्यम रोज्न सक्नुहुन्छ।</p>
+                    </div>
+                    <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-1.5">
+                        <h3 class="font-bold text-slate-900 text-xs sm:text-base" data-i18n="faq3Q">के मेरो नाम गोप्य राख्न मिल्छ?</h3>
+                        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed" data-i18n="faq3A">हो, विवरण बुझाउने क्रममा 'Anonymous' विकल्प चयन गर्नुभयो भने तपाईंको नाम सार्वजनिक गरिने छैन।</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================== -->
+    <!-- FOCUSED DONATION MODAL OVERLAY             -->
+    <!-- ========================================== -->
+    <div id="donation-modal-overlay" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+        
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl border border-slate-200 overflow-hidden relative my-8 animate-in fade-in zoom-in duration-200">
+            
+            <!-- MODAL HEADER -->
+            <div class="bg-gradient-to-r from-brand-900 to-brand-950 text-white p-4 sm:p-5 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-accent flex items-center justify-center">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </div>
+                    <div>
+                        <span class="font-heading font-bold text-sm sm:text-base block leading-tight" data-i18n="modalWindowTitle">MSR — सुरक्षित सहयोग पोर्टल</span>
+                        <span class="text-[10px] text-emerald-300 font-medium uppercase tracking-wider block" data-i18n="modalWindowSub">Hope & Help Contribution Portal</span>
+                    </div>
+                </div>
+                <button onclick="appState.closeDonationFlow()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition-colors focus:outline-none" aria-label="Close modal">
+                    ✕
+                </button>
+            </div>
+
+            <!-- STEP INDICATOR -->
+            <div class="bg-slate-50 px-6 py-3 border-b border-slate-100 flex items-center justify-between text-xs font-bold text-slate-600">
+                <div id="step-indicator-1" class="flex items-center gap-1 text-brand-800">
+                    <span class="w-5 h-5 rounded-full bg-brand-800 text-white flex items-center justify-center text-[10px]">1</span>
+                    <span data-i18n="stepRegion">स्थान</span>
+                </div>
+                <span class="text-slate-300">➔</span>
+                <div id="step-indicator-2" class="flex items-center gap-1 text-slate-400">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px]">2</span>
+                    <span data-i18n="stepAmount">रकम</span>
+                </div>
+                <span class="text-slate-300">➔</span>
+                <div id="step-indicator-3" class="flex items-center gap-1 text-slate-400">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px]">3</span>
+                    <span data-i18n="stepMethod">माध्यम</span>
+                </div>
+                <span class="text-slate-300">➔</span>
+                <div id="step-indicator-4" class="flex items-center gap-1 text-slate-400">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px]">4</span>
+                    <span data-i18n="stepQr">QR</span>
+                </div>
+            </div>
+
+            <!-- MODAL BODY CONTENT -->
+            <div class="p-5 sm:p-6 max-h-[75vh] overflow-y-auto">
+                
+                <!-- STEP 1: REGION SELECT -->
+                <div id="flow-step-1" class="view-step view-active space-y-4">
+                    
+                    <!-- EMOTIONAL QUOTE BANNER 1 -->
+                    <div class="bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-200 p-3.5 rounded-2xl flex items-start gap-3 shadow-xs">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 font-bold text-base shadow-xs">🤝</div>
+                        <div class="space-y-0.5">
+                            <h4 class="text-xs font-bold text-emerald-900" data-i18n="quote1Header">सहयोगको आह्वान</h4>
+                            <p class="text-[11px] text-emerald-800 leading-relaxed font-medium" data-i18n="quote1Text">अहिले नै सहयोग गर्नुहोस्—तपाईंको सानो दान, आवश्यक परेको कसैका लागि ठूलो राहत बन्न सक्छ। 🤝❤️</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center space-y-1 pt-1">
+                        <h3 class="text-base sm:text-lg font-heading font-bold text-slate-900" data-i18n="regionHeading">
+                            तपाईं कहाँबाट सहयोग गर्दै हुनुहुन्छ?
+                        </h3>
+                        <p class="text-xs text-slate-600 font-medium" data-i18n="regionInstruction">तपाईं अहिले जहाँबाट सहयोग गर्दै हुनुहुन्छ, आफ्नो क्षेत्र छान्नुहोस् र सहयोगको पहिलो कदम चाल्नुहोस्। 🌍👇</p>
+                    </div>
+
+                    <div class="grid gap-2.5 pt-1">
+                        <button onclick="appState.selectRegion('nepal')" class="bg-slate-50 hover:bg-brand-50 border-2 border-slate-200 hover:border-brand-800 rounded-2xl p-4 text-left transition-all shadow-xs flex items-center gap-3.5 group">
+                            <div class="text-2xl p-2 bg-white rounded-xl shadow-xs">🇳🇵</div>
+                            <div class="flex-1">
+                                <span class="font-bold text-slate-900 text-sm sm:text-base block" data-i18n="regionNepalTitle">नेपालबाट सहयोग</span>
+                                <span class="text-xs text-slate-500 block mt-0.5" data-i18n="regionNepalDesc">eSewa, Khalti, Bank QR</span>
+                            </div>
+                            <div class="text-slate-300 group-hover:text-brand-800 font-bold">➔</div>
+                        </button>
+
+                        <button onclick="appState.selectRegion('international')" class="bg-slate-50 hover:bg-brand-50 border-2 border-slate-200 hover:border-brand-800 rounded-2xl p-4 text-left transition-all shadow-xs flex items-center gap-3.5 group">
+                            <div class="text-2xl p-2 bg-white rounded-xl shadow-xs">🌍</div>
+                            <div class="flex-1">
+                                <span class="font-bold text-slate-900 text-sm sm:text-base block" data-i18n="regionIntlTitle">विदेशबाट सहयोग</span>
+                                <span class="text-xs text-slate-500 block mt-0.5" data-i18n="regionIntlDesc">International Bank Transfer (SWIFT)</span>
+                            </div>
+                            <div class="text-slate-300 group-hover:text-brand-800 font-bold">➔</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: AMOUNT SELECT -->
+                <div id="flow-step-2" class="view-step view-hidden space-y-4">
+                    
+                    <!-- EMOTIONAL QUOTE BANNER 2 -->
+                    <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 p-3.5 rounded-2xl flex items-start gap-3 shadow-xs">
+                        <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 font-bold text-base shadow-xs">💝</div>
+                        <div class="space-y-0.5">
+                            <h4 class="text-xs font-bold text-amber-900" data-i18n="quote2Header">सहयोगको मूल्य</h4>
+                            <p class="text-[11px] text-amber-900 leading-relaxed font-medium" data-i18n="quote2Text">आज तपाईंले दिनुभएको सानो रकमले पनि कसैको कठिन समयमा ठूलो साथ दिन सक्छ—अहिले नै आफ्नो सहयोग गर्नुहोस्। 💝🙏</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center space-y-1">
+                        <h3 class="text-base sm:text-lg font-heading font-bold text-slate-900" data-i18n="amountHeading">
+                            कति सहयोग गर्न चाहनुहुन्छ?
+                        </h3>
+                        <p class="text-xs text-slate-600 font-medium" data-i18n="amountInstruction">आफूलाई सहज हुने रकम छान्नुहोस् वा आफ्नो इच्छाअनुसार रकम लेख्नुहोस्। प्रत्येक सहयोगको अर्थ हुन्छ। 💰❤️</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div id="container-amount-nepal" class="space-y-3">
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" onclick="appState.setPresetAmount(100)" class="btn-amt-preset p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm font-bold text-slate-700 hover:border-brand-800 hover:bg-brand-50 transition-all" data-value="100">NPR 100</button>
+                                <button type="button" onclick="appState.setPresetAmount(500)" class="btn-amt-preset p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm font-bold text-slate-700 hover:border-brand-800 hover:bg-brand-50 transition-all" data-value="500">NPR 500</button>
+                                <button type="button" onclick="appState.setPresetAmount(1000)" class="btn-amt-preset p-2.5 rounded-xl border-2 border-brand-800 bg-brand-50 text-xs sm:text-sm font-bold text-brand-900 transition-all" data-value="1000">NPR 1,000</button>
+                                <button type="button" onclick="appState.setPresetAmount(2500)" class="btn-amt-preset p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm font-bold text-slate-700 hover:border-brand-800 hover:bg-brand-50 transition-all" data-value="2500">NPR 2,500</button>
+                                <button type="button" onclick="appState.setPresetAmount(5000)" class="btn-amt-preset p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm font-bold text-slate-700 hover:border-brand-800 hover:bg-brand-50 transition-all" data-value="5000">NPR 5,000</button>
+                                <button type="button" onclick="appState.toggleCustomAmountInput()" class="p-2.5 rounded-xl border border-slate-200 text-[11px] font-bold text-slate-600 hover:border-brand-800 transition-all" data-i18n="amtCustomLabel">अन्य रकम</button>
+                            </div>
+
+                            <div id="wrapper-custom-amt" class="hidden pt-1">
+                                <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="enterAmountLabel">इच्छा अनुसारको रकम (रु):</label>
+                                <input type="number" id="input-custom-amt-nepal" min="10" placeholder="Min NPR 10" class="w-full p-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm font-bold text-slate-900 outline-none focus:border-brand-800">
+                            </div>
+                        </div>
+
+                        <div id="container-amount-intl" class="hidden space-y-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="currencyLabel">मुद्रा (Currency):</label>
+                                    <select id="select-intl-currency" class="w-full p-2.5 border border-slate-300 rounded-xl bg-white text-xs sm:text-sm font-bold text-slate-800">
+                                        <option value="USD">USD ($)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                        <option value="GBP">GBP (£)</option>
+                                        <option value="AUD">AUD ($)</option>
+                                        <option value="CAD">CAD ($)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="amountLabel">रकम (Amount):</label>
+                                    <input type="number" id="input-intl-amt" min="1" value="25" class="w-full p-2.5 border border-slate-300 rounded-xl text-xs sm:text-sm font-bold text-slate-900">
+                                </div>
+                            </div>
+                            <p class="text-[11px] text-amber-800 bg-amber-50 p-2 rounded-lg border border-amber-200" data-i18n="intlNotice">
+                                The amount shown is your intended donation amount. Please enter/pay the same amount in your banking/payment app.
+                            </p>
+                        </div>
+
+                        <button onclick="appState.submitAmountStep()" class="w-full bg-brand-800 hover:bg-brand-900 text-white font-bold py-3 rounded-xl shadow transition-all text-xs sm:text-sm" data-i18n="btnContinue">
+                            अगाडि बढ्नुहोस्
+                        </button>
+                    </div>
+
+                    <button onclick="appState.navigateToStep(1)" class="w-full text-xs font-semibold text-slate-500 hover:text-slate-800 py-1">
+                        ← <span data-i18n="btnBack">पछाडि फर्कनुहोस्</span>
+                    </button>
+                </div>
+
+                <!-- STEP 3: METHOD SELECT -->
+                <div id="flow-step-3" class="view-step view-hidden space-y-4">
+                    
+                    <!-- EMOTIONAL QUOTE BANNER 3 -->
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 p-3.5 rounded-2xl flex items-start gap-3 shadow-xs">
+                        <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 font-bold text-base shadow-xs">🤝</div>
+                        <div class="space-y-0.5">
+                            <h4 class="text-xs font-bold text-blue-900" data-i18n="quote3Header">बदलावको सुरुवात</h4>
+                            <p class="text-[11px] text-blue-900 leading-relaxed font-medium" data-i18n="quote3Text">सहयोग गर्ने तपाईंको निर्णयले नै परिवर्तनको सुरुवात गर्छ—अहिले नै आफूलाई सहज हुने माध्यमबाट दान गर्नुहोस्। 🤝💚</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center space-y-1">
+                        <h3 class="text-base sm:text-lg font-heading font-bold text-slate-900" data-i18n="methodHeading">
+                            भुक्तानी माध्यम छान्नुहोस्
+                        </h3>
+                        <p class="text-xs text-slate-600 font-medium" data-i18n="methodInstruction">उपलब्ध माध्यममध्ये आफूलाई सहज हुने payment method छान्नुहोस् र आफ्नो सहयोग अघि बढाउनुहोस्। 📲👇</p>
+                    </div>
+
+                    <div id="methods-nepal-grid" class="grid gap-2.5 pt-1">
+                        <button onclick="appState.selectPaymentMethod('esewa')" class="bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-800 p-3.5 rounded-2xl flex items-center justify-between font-bold text-slate-800 shadow-xs transition-all text-xs sm:text-sm">
+                            <span class="flex items-center gap-2.5">
+                                <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                                eSewa
+                            </span>
+                            <span class="text-slate-300 font-bold">➔</span>
+                        </button>
+
+                        <button onclick="appState.selectPaymentMethod('khalti')" class="bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-800 p-3.5 rounded-2xl flex items-center justify-between font-bold text-slate-800 shadow-xs transition-all text-xs sm:text-sm">
+                            <span class="flex items-center gap-2.5">
+                                <span class="w-3 h-3 rounded-full bg-purple-600"></span>
+                                Khalti
+                            </span>
+                            <span class="text-slate-300 font-bold">➔</span>
+                        </button>
+
+                        <button onclick="appState.selectPaymentMethod('bank')" class="bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-800 p-3.5 rounded-2xl flex items-center justify-between font-bold text-slate-800 shadow-xs transition-all text-xs sm:text-sm">
+                            <span class="flex items-center gap-2.5">
+                                <span class="w-3 h-3 rounded-full bg-blue-600"></span>
+                                Bank QR (CIPS / Direct)
+                            </span>
+                            <span class="text-slate-300 font-bold">➔</span>
+                        </button>
+                    </div>
+
+                    <div id="methods-intl-grid" class="hidden">
+                        <button onclick="appState.selectPaymentMethod('bank')" class="bg-slate-50 hover:bg-brand-50 border border-slate-200 hover:border-brand-800 p-3.5 rounded-2xl flex items-center justify-between font-bold text-slate-800 shadow-xs transition-all w-full text-xs sm:text-sm">
+                            <span class="flex items-center gap-2.5">
+                                <span class="w-3 h-3 rounded-full bg-indigo-600"></span>
+                                International Wire / Bank Transfer
+                            </span>
+                            <span class="text-slate-300 font-bold">➔</span>
+                        </button>
+                    </div>
+
+                    <button onclick="appState.navigateToStep(2)" class="w-full text-xs font-semibold text-slate-500 hover:text-slate-800 py-1">
+                        ← <span data-i18n="btnBack">पछाडि फर्कनुहोस्</span>
+                    </button>
+                </div>
+
+                <!-- STEP 4: DISPLAY QR + DOWNLOAD BUTTON -->
+                <div id="flow-step-4" class="view-step view-hidden space-y-4">
+                    
+                    <!-- EMOTIONAL QUOTE BANNER 4 -->
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 p-3.5 rounded-2xl flex items-start gap-3 shadow-xs">
+                        <div class="w-9 h-9 rounded-xl bg-purple-600 text-white flex items-center justify-center shrink-0 font-bold text-base shadow-xs">📲</div>
+                        <div class="space-y-0.5">
+                            <h4 class="text-xs font-bold text-purple-900" data-i18n="quote4Header">आशाको एक कदम</h4>
+                            <p class="text-[11px] text-purple-900 leading-relaxed font-medium" data-i18n="quote4Text">अब तपाईंको सहयोग केवल एक Scan टाढा छ—अहिले नै दान गर्नुहोस्, कसैको कठिन समयमा आशा बनिदिनुहोस्। 📲❤️</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/90 shadow-xs text-center space-y-3 max-w-sm mx-auto">
+                        
+                        <div class="space-y-0.5">
+                            <span class="font-heading font-extrabold text-xs sm:text-sm text-slate-900 tracking-wider">MSR — HOPE & HELP</span>
+                            <p class="text-[11px] text-slate-600 font-medium" data-i18n="qrInstructionLine">QR Code Scan गर्नुहोस्, आफ्नो payment app वा banking app बाट भुक्तानी पूरा गर्नुहोस्, अनि ‘मैले सहयोग गरिसकेँ’ चयन गर्नुहोस्। 📱✅</p>
+                        </div>
+
+                        <!-- QR CODE CANVAS CONTAINER -->
+                        <div class="bg-white p-3 rounded-2xl border-2 border-slate-100 shadow-inner inline-block">
+                            <div id="qrcode-canvas-target" class="w-[180px] h-[180px] sm:w-[210px] sm:h-[210px] flex items-center justify-center bg-slate-50 rounded-xl overflow-hidden">
+                                <!-- QR Render Target -->
+                            </div>
+                        </div>
+
+                        <!-- AMOUNT & METHOD REFERENCE LABEL -->
+                        <div class="space-y-0.5">
+                            <div id="display-qr-amount" class="text-lg font-black text-brand-800">
+                                NPR 1,000
+                            </div>
+                            <span id="display-qr-method-label" class="inline-block text-[10px] font-bold text-slate-600 uppercase tracking-widest bg-slate-200/80 px-2 py-0.5 rounded-full">
+                                eSewa QR
+                            </span>
+                        </div>
+
+                        <!-- QR DOWNLOAD BUTTON -->
+                        <div>
+                            <button onclick="appState.downloadQRCodeImage()" class="btn-black-pill shadow-sm">
+                                <svg class="w-3.5 h-3.5 fill-current text-white" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                                <span data-i18n="btnDownloadQr">QR Code डाउनलोड गर्नुहोस्</span>
+                            </button>
+                        </div>
+
+                        <button onclick="appState.navigateToStep(5)" class="w-full bg-brand-800 hover:bg-brand-900 text-white font-bold py-3 rounded-xl shadow-md transition-all text-xs sm:text-sm" data-i18n="btnIHavePaid">
+                            मैले भुक्तानी गरिसकेँ
+                        </button>
+
+                        <button onclick="appState.navigateToStep(3)" class="text-xs text-slate-500 hover:text-slate-800 font-semibold block mx-auto pt-0.5" data-i18n="btnChangeMethod">
+                            ← Payment Method Change गर्नुहोस्
+                        </button>
+                    </div>
+
+                    <div id="qr-fail-box" class="hidden bg-rose-50 border border-rose-200 text-rose-800 p-3 rounded-2xl text-center space-y-2">
+                        <p class="text-xs font-bold" data-i18n="qrFailText">
+                            QR Code तयार गर्न समस्या भयो। कृपया फेरि प्रयास गर्नुहोस्।
+                        </p>
+                        <button onclick="appState.retryQRGeneration()" class="bg-rose-700 text-white text-xs font-bold px-3 py-1.5 rounded-lg">
+                            Retry
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 5: DONOR FORM SUBMISSION -->
+                <div id="flow-step-5" class="view-step view-hidden space-y-4">
+                    
+                    <!-- EMOTIONAL QUOTE BANNER 5 -->
+                    <div class="bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-200 p-3.5 rounded-2xl flex items-start gap-3 shadow-xs">
+                        <div class="w-9 h-9 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0 font-bold text-base shadow-xs">❤️</div>
+                        <div class="space-y-0.5">
+                            <h4 class="text-xs font-bold text-teal-900" data-i18n="quote5Header">विश्वास र जिम्मेवारी</h4>
+                            <p class="text-[11px] text-teal-900 leading-relaxed font-medium" data-i18n="quote5Text">तपाईंले सहयोग गरिसक्नुभयो—अब केही विवरण साझा गरेर आफ्नो दानलाई अभिलेख र पुष्टि गर्न सहयोग गर्नुहोस्। तपाईंको विश्वास हाम्रो जिम्मेवारी हो। ❤️📝</p>
+                        </div>
+                    </div>
+
+                    <div id="wrapper-donor-form" class="bg-slate-50 p-5 rounded-3xl border border-slate-200 shadow-xs space-y-3.5">
+                        <div class="text-center space-y-0.5">
+                            <h3 class="text-base sm:text-lg font-heading font-bold text-slate-900" data-i18n="formTitle">
+                                सहयोगकर्ताको विवरण
+                            </h3>
+                            <p class="text-xs text-slate-600 font-medium" data-i18n="formInstruction">आफ्नो नाम, सम्पर्क नम्बर र Transaction ID भर्नुहोस्। विवरण जाँच गरी ‘सहयोग पुष्टि गर्नुहोस्’ थिच्नुहोस्। 📝✅</p>
+                        </div>
+
+                        <form id="form-donor-submit" onsubmit="appState.handleDonorSubmit(event)" class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="labelFullName">पुरा नाम *</label>
+                                <input type="text" id="input-donor-name" required class="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm outline-none focus:border-brand-800">
+                            </div>
+
+                            <div class="grid sm:grid-cols-2 gap-2.5">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="labelPhone">मोबाइल नम्बर *</label>
+                                    <input type="text" id="input-donor-phone" required placeholder="98XXXXXXXX" class="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm outline-none focus:border-brand-800">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="labelTxnId">ट्रान्स्याक्सन ID / रेफरेन्स</label>
+                                    <input type="text" id="input-donor-txnid" placeholder="Optional / Ref Code" class="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm outline-none focus:border-brand-800">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1" data-i18n="labelEmail">इमेल ठेगाना (ऐच्छिक)</label>
+                                <input type="email" id="input-donor-email" class="w-full p-2.5 bg-white border border-slate-300 rounded-xl text-xs sm:text-sm outline-none focus:border-brand-800">
+                            </div>
+
+                            <div class="flex items-center gap-2 pt-0.5">
+                                <input type="checkbox" id="check-anonymous" class="w-4 h-4 text-brand-800 rounded border-slate-300">
+                                <label htmlFor="check-anonymous" class="text-xs text-slate-700 font-medium cursor-pointer" data-i18n="labelAnonymous">
+                                    म मेरो नाम सार्वजनिक नगरी सहयोग गर्न चाहन्छु (Anonymous Donation)
+                                </label>
+                            </div>
+
+                            <button type="submit" id="btn-submit-donor-form" class="w-full bg-brand-800 hover:bg-brand-900 text-white font-bold py-3 rounded-xl shadow-md transition-all text-xs sm:text-sm mt-1" data-i18n="btnSubmitForm">
+                                सहयोग पुष्टि गर्नुहोस्
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- STEP 6: THANK YOU & RETURN HOME BUTTON -->
+                <div id="flow-step-6" class="view-step view-hidden space-y-4">
+                    <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-xs text-center space-y-4">
+                        <div class="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-2xl font-bold">
+                            ❤️
+                        </div>
+
+                        <div class="space-y-1">
+                            <h3 class="text-lg sm:text-xl font-heading font-extrabold text-slate-900" data-i18n="thankYouHeading">
+                                धन्यवाद!
+                            </h3>
+                            <p class="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto leading-relaxed" data-i18n="thankYouMessage">
+                                तपाईंको सहयोगका लागि हृदयदेखि धन्यवाद। तपाईंको योगदानले कसैको जीवनमा सकारात्मक परिवर्तन ल्याउन मद्दत गर्न सक्छ।
+                            </p>
+                        </div>
+
+                        <!-- RECEIPT SUMMARY CARD -->
+                        <div class="bg-white p-3.5 rounded-2xl border border-slate-200 text-left text-xs space-y-1.5 font-mono shadow-xs">
+                            <div class="flex justify-between border-b pb-1">
+                                <span class="text-slate-500">Donation Ref ID:</span>
+                                <span id="res-donation-id" class="font-bold text-brand-800">HH-2026-000000</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">Status:</span>
+                                <span class="font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded text-[10px]">PENDING VERIFICATION</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">Amount:</span>
+                                <span id="res-donation-amt" class="font-bold text-slate-900">NPR 1,000</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2 pt-1">
+                            <button onclick="appState.openWhatsAppNotification()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow">
+                                <span>WhatsApp मार्फत सूचना पठाउनुहोस्</span>
+                            </button>
+
+                            <!-- RETURN TO HOME BUTTON -->
+                            <button onclick="appState.closeDonationFlow()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl text-xs sm:text-sm transition-colors shadow-xs" data-i18n="btnReturnHome">
+                                मुख्य पृष्ठमा फर्कनुहोस्
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MOBILE BOTTOM NAVIGATION -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-slate-200 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] px-3 py-2 flex justify-around items-center">
+        <a href="#home" onclick="appState.navigateToSection('home')" class="flex flex-col items-center justify-center w-full py-1 text-slate-600 hover:text-brand-800 transition-colors focus:outline-none">
+            <svg class="w-5 h-5 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="text-[10px] font-medium mt-0.5" data-i18n="navHome">गृह</span>
+        </a>
+
+        <a href="#mission" onclick="appState.navigateToSection('mission')" class="flex flex-col items-center justify-center w-full py-1 text-slate-600 hover:text-brand-800 transition-colors focus:outline-none">
+            <svg class="w-5 h-5 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+            <span class="text-[10px] font-medium mt-0.5" data-i18n="navMission">उद्देश्य</span>
+        </a>
+
+        <!-- DONATE ICON WITH PADDING & ROUND BG -->
+        <div class="flex items-center justify-center w-full -mt-6">
+            <button onclick="appState.startDonationFlow()" class="flex items-center justify-center bg-brand-800 text-white rounded-full w-14 h-14 shadow-xl shadow-brand-900/40 border-4 border-white active:scale-95 transition-transform p-2.5">
+                <svg class="w-7 h-7 fill-current text-accent" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </button>
+        </div>
+
+        <a href="#programs" onclick="appState.navigateToSection('programs')" class="flex flex-col items-center justify-center w-full py-1 text-slate-600 hover:text-brand-800 transition-colors focus:outline-none">
+            <svg class="w-5 h-5 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span class="text-[10px] font-medium mt-0.5" data-i18n="navPrograms">कार्यक्रम</span>
+        </a>
+
+        <a href="#faq" onclick="appState.navigateToSection('faq')" class="flex flex-col items-center justify-center w-full py-1 text-slate-600 hover:text-brand-800 transition-colors focus:outline-none">
+            <svg class="w-5 h-5 stroke-current stroke-2 fill-none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span class="text-[10px] font-medium mt-0.5" data-i18n="navFaq">प्रश्न</span>
+        </a>
+    </nav>
+
+    <!-- FOOTER -->
+    <footer id="site-footer" class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mb-14 md:mb-0 transition-all">
+        <div class="max-w-6xl mx-auto px-4 text-center space-y-3">
+            <p class="font-heading font-extrabold text-white text-sm">MSR — Make Someone Rise</p>
+            <p data-i18n="footerTagline">“तपाईंको सानो सहयोग, कसैको जीवन उठाउने ठूलो शक्ति बन्न सक्छ।”</p>
+            <p class="text-[11px] text-slate-500 pt-2 border-t border-slate-800">
+                All Rights Reserved © 2026 MSR — Make Someone Rise (msr.com.np).
+            </p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <script>
+        const CONFIG = {
+            brand: "MSR — Make Someone Rise",
+            initiative: "HOPE & HELP",
+            domain: "https://msr.com.np/",
+            whatsappAdmin: "97430780213"
+        };
+
+        const QR_PAYLOADS = {
+            nepal: {
+                esewa: '{"eSewa_id":"9807648317","name":"Isul Kawari"}',
+                khalti: '{"Khalti_ID": "9807648317", "name": "Ishul Kawari"}',
+                bank: '{"accountNumber":"0315759479191001","accountName":"ISHUL KAWARI","bankCode":"BOALNPKA","accountType":"Sarbashrestha Sahaj Bachat Khata Online","bankCodeCIPS":"2301"}'
+            },
+            international: {
+                bank: '{"accountNumber":"0315759479191001","accountName":"ISHUL KAWARI","bankCode":"BOALNPKA","accountType":"Sarbashrestha Sahaj Bachat Khata Online","bankCodeCIPS":"2301"}'
+            }
+        };
+
+        const TRANSLATIONS = {
+            ne: {
+                navHome: "गृह",
+                navMission: "उद्देश्य",
+                navPrograms: "कार्यक्रम",
+                navTransparency: "पारदर्शिता",
+                navFaq: "प्रश्न",
+                navDonateBtn: "सहयोग गर्नुहोस्",
+                heroHeading: "तपाईंको सानो सहयोग,\nकसैको जीवन उठाउने ठूलो शक्ति बन्न सक्छ।",
+                heroSubheading: "आर्थिक तथा सामाजिक रूपमा कमजोर व्यक्ति र परिवारलाई आत्मनिर्भर र सम्मानजनक जीवनतर्फ अघि बढाउन सहयोग गर्नुहोस्।",
+                heroCtaPrimary: "अहिले सहयोग गर्नुहोस्",
+                heroCtaSecondary: "मुख्य कार्यक्रमहरू",
+                initiativeTag: "मानवीय पहल",
+                heroQuoteLabel: "मुख्य सन्देश",
+                heroQuoteText: "“सानो सहयोग गरौँ, कसैलाई फेरि उठ्न मद्दत गरौँ।”",
+                heroDisclaimer: "तपाईंको सानो स्वेच्छिक सहयोगले नेपालका असहाय तथा बिरामी व्यक्तिहरूलाई नयाँ जीवनको आशा दिन सक्छ।",
+                heroCardBtn: "सहयोग अभियानमा जोडिनुहोस्",
+                modalWindowTitle: "MSR — सुरक्षित सहयोग पोर्टल",
+                modalWindowSub: "Hope & Help Contribution Portal",
+                stepRegion: "स्थान",
+                stepAmount: "रकम",
+                stepMethod: "माध्यम",
+                stepQr: "QR",
+                quote1Header: "सहयोगको आह्वान",
+                quote1Text: "अहिले नै सहयोग गर्नुहोस्—तपाईंको सानो दान, आवश्यक परेको कसैका लागि ठूलो राहत बन्न सक्छ। 🤝❤️",
+                regionHeading: "तपाईं कहाँबाट सहयोग गर्दै हुनुहुन्छ?",
+                regionInstruction: "तपाईं अहिले जहाँबाट सहयोग गर्दै हुनुहुन्छ, आफ्नो क्षेत्र छान्नुहोस् र सहयोगको पहिलो कदम चाल्नुहोस्। 🌍👇",
+                regionSubheading: "कृपया भुक्तानी माध्यम छनोटका लागि स्थान रोज्नुहोस्।",
+                regionNepalTitle: "नेपालबाट सहयोग",
+                regionNepalDesc: "eSewa, Khalti, Bank QR",
+                regionIntlTitle: "विदेशबाट सहयोग",
+                regionIntlDesc: "International Bank Transfer (SWIFT)",
+                quote2Header: "सहयोगको मूल्य",
+                quote2Text: "आज तपाईंले दिनुभएको सानो रकमले पनि कसैको कठिन समयमा ठूलो साथ दिन सक्छ—अहिले नै आफ्नो सहयोग गर्नुहोस्। 💝🙏",
+                amountHeading: "कति सहयोग गर्न चाहनुहुन्छ?",
+                amountInstruction: "आफूलाई सहज हुने रकम छान्नुहोस् वा आफ्नो इच्छाअनुसार रकम लेख्नुहोस्। प्रत्येक सहयोगको अर्थ हुन्छ। 💰❤️",
+                amountSubheading: "सानो सहयोगले पनि कसैको जीवनमा ठूलो प्रभाव पार्छ।",
+                amtCustomLabel: "अन्य रकम",
+                enterAmountLabel: "इच्छा अनुसारको रकम (रु):",
+                currencyLabel: "मुद्रा (Currency):",
+                amountLabel: "रकम (Amount):",
+                intlNotice: "The amount shown is your intended donation amount. Please enter/pay the same amount in your banking/payment app.",
+                quote3Header: "बदलावको सुरुवात",
+                quote3Text: "सहयोग गर्ने तपाईंको निर्णयले नै परिवर्तनको सुरुवात गर्छ—अहिले नै आफूलाई सहज हुने माध्यमबाट दान गर्नुहोस्। 🤝💚",
+                methodHeading: "भुक्तानी माध्यम छान्नुहोस्",
+                methodInstruction: "उपलब्ध माध्यममध्ये आफूलाई सहज हुने payment method छान्नुहोस् र आफ्नो सहयोग अघि बढाउनुहोस्। 📲👇",
+                methodSubheading: "कृपया आफूलाई सहज हुने माध्यम रोज्नुहोस्।",
+                quote4Header: "आशाको एक कदम",
+                quote4Text: "अब तपाईंको सहयोग केवल एक Scan टाढा छ—अहिले नै दान गर्नुहोस्, कसैको कठिन समयमा आशा बनिदिनुहोस्। 📲❤️",
+                qrInstructionLine: "QR Code Scan गर्नुहोस्, आफ्नो payment app वा banking app बाट भुक्तानी पूरा गर्नुहोस्, अनि ‘मैले सहयोग गरिसकेँ’ चयन गर्नुहोस्। 📱✅",
+                scanTitle: "Scan to Donate",
+                btnDownloadQr: "QR Code डाउनलोड गर्नुहोस्",
+                btnIHavePaid: "मैले भुक्तानी गरिसकेँ",
+                btnChangeMethod: "← Payment Method Change गर्नुहोस्",
+                qrFailText: "QR Code तयार गर्न समस्या भयो। कृपया फेरि प्रयास गर्नुहोस्।",
+                quote5Header: "विश्वास र जिम्मेवारी",
+                quote5Text: "तपाईंले सहयोग गरिसक्नुभयो—अब केही विवरण साझा गरेर आफ्नो दानलाई अभिलेख र पुष्टि गर्न सहयोग गर्नुहोस्। तपाईंको विश्वास हाम्रो जिम्मेवारी हो। ❤️📝",
+                formTitle: "सहयोगकर्ताको विवरण",
+                formInstruction: "आफ्नो नाम, सम्पर्क नम्बर र Transaction ID भर्नुहोस्। विवरण जाँच गरी ‘सहयोग पुष्टि गर्नुहोस्’ थिच्नुहोस्। 📝✅",
+                formSubheading: "प्रमाणीकरणका लागि भुक्तानी विवरण बुझाउनुहोस्।",
+                labelFullName: "पुरा नाम *",
+                labelPhone: "मोबाइल नम्बर *",
+                labelTxnId: "ट्रान्स्याक्सन ID / रेफरेन्स",
+                labelEmail: "इमेल ठेगाना (ऐच्छिक)",
+                labelAnonymous: "म मेरो नाम सार्वजनिक नगरी सहयोग गर्न चाहन्छु (Anonymous Donation)",
+                btnSubmitForm: "सहयोग पुष्टि गर्नुहोस्",
+                thankYouHeading: "धन्यवाद!",
+                thankYouMessage: "तपाईंको सहयोगका लागि हृदयदेखि धन्यवाद। तपाईंको योगदानले कसैको जीवनमा सकारात्मक परिवर्तन ल्याउन मद्दत गर्न सक्छ।",
+                btnReturnHome: "मुख्य पृष्ठमा फर्कनुहोस्",
+                btnContinue: "अगाडि बढ्नुहोस्",
+                btnBack: "पछाडि फर्कनुहोस्",
+                missionTag: "MSR - Make Someone Rise",
+                missionTitle: "हाम्रो उद्देश्य",
+                missionBody: "आर्थिक तथा सामाजिक रूपमा कमजोर व्यक्ति र परिवारलाई शिक्षा, स्वास्थ्य, खाद्य सुरक्षा, आपतकालीन राहत, रोजगारी/सीप विकास तथा अन्य आवश्यक सहयोग उपलब्ध गराई आत्मनिर्भर र सम्मानजनक जीवनतर्फ अघि बढाउन सहयोग गर्ने।",
+                progTitle: "मुख्य कार्यक्रमहरू",
+                progSubtitle: "तपाईंको स्वेच्छिक सहयोगबाट सञ्चालन हुने प्रमुख राहत तथा सशक्तीकरण कार्यक्रमहरू:",
+                prog1Title: "Emergency Assistance",
+                prog1Desc: "आकस्मिक आर्थिक सहायता",
+                prog2Title: "Medical Support",
+                prog2Desc: "उपचार/औषधि खर्चमा सहयोग",
+                prog3Title: "Education Support",
+                prog3Desc: "विद्यार्थीलाई scholarship",
+                prog4Title: "Food Support",
+                prog4Desc: "खाद्यान्न वितरण",
+                prog5Title: "Family Support",
+                prog5Desc: "विपन्न परिवारलाई सहयोग",
+                prog6Title: "Disability Support",
+                prog6Desc: "अपाङ्गता भएका व्यक्तिलाई सहायता",
+                prog7Title: "Elderly Support",
+                prog7Desc: "ज्येष्ठ नागरिक सहयोग",
+                prog8Title: "Disaster Relief",
+                prog8Desc: "बाढी, आगलागी, भूकम्प आदि",
+                prog9Title: "Skill Development",
+                prog9Desc: "सीप तथा रोजगारी सहयोग",
+                prog10Title: "Livelihood Support",
+                prog10Desc: "सानो व्यवसाय/आयआर्जन सहयोग",
+                transparencyTitle: "हामी पारदर्शितामा विश्वास गर्छौँ",
+                transparencySubtitle: "प्रत्येक प्राप्त सहयोगको अभिलेख सुरक्षित राखिन्छ र प्रमाणित प्रतिवेदन सार्वजनिक गरिन्छ।",
+                trCard1: "प्राप्त सहयोग",
+                trCard2: "वितरित राहत",
+                trCard3: "प्रशासनिक खर्च",
+                faqHeading: "प्रायः सोधिने प्रश्नहरू (FAQs)",
+                faq1Q: "म कसरी सहयोग गर्न सक्छु?",
+                faq1A: "तपाईंले वेबसाइटमा रहेको QR Scan गरी eSewa, Khalti वा बैंक ट्रान्सफर मार्फत स्वेच्छिक सहयोग पठाउन सक्नुहुन्छ।",
+                faq2Q: "के म विदेशबाट सहयोग पठाउन सक्छु?",
+                faq2A: "हो, विदेशबाट सहयोग गर्न 'International Bank Transfer' माध्यम रोज्न सक्नुहुन्छ।",
+                faq3Q: "के मेरो नाम गोप्य राख्न मिल्छ?",
+                faq3A: "हो, विवरण बुझाउने क्रममा 'Anonymous' विकल्प चयन गर्नुभयो भने तपाईंको नाम सार्वजनिक गरिने छैन।",
+                footerTagline: "“तपाईंको सानो सहयोग, कसैको जीवन उठाउने ठूलो शक्ति बन्न सक्छ।”"
+            },
+            en: {
+                navHome: "Home",
+                navMission: "Mission",
+                navPrograms: "Programs",
+                navTransparency: "Impact",
+                navFaq: "FAQ",
+                navDonateBtn: "Donate Now",
+                heroHeading: "Your small contribution can become a powerful force\nthat helps someone rise again.",
+                heroSubheading: "Empower economically and socially vulnerable individuals and families towards self-reliance and a dignified life.",
+                heroCtaPrimary: "Donate Now",
+                heroCtaSecondary: "Key Programs",
+                initiativeTag: "Humanitarian Initiative",
+                heroQuoteLabel: "Core Message",
+                heroQuoteText: "“Make a small contribution. Help someone rise again.”",
+                heroDisclaimer: "Your voluntary contribution helps provide direct support to genuine beneficiaries facing crisis.",
+                heroCardBtn: "Join Donation Initiative",
+                modalWindowTitle: "MSR — Secure Donation Portal",
+                modalWindowSub: "Hope & Help Contribution Portal",
+                stepRegion: "Region",
+                stepAmount: "Amount",
+                stepMethod: "Method",
+                stepQr: "QR",
+                quote1Header: "Call to Action",
+                quote1Text: "“Donate today—your small gift can become meaningful support for someone who needs it most. 🤝❤️”",
+                regionHeading: "Where are you donating from?",
+                regionInstruction: "“Select where you are donating from and take the first step toward helping someone today. 🌍👇”",
+                regionSubheading: "Select your location to view available payment channels.",
+                regionNepalTitle: "Donate from Nepal",
+                regionNepalDesc: "eSewa, Khalti, Bank QR",
+                regionIntlTitle: "Donate Internationally",
+                regionIntlDesc: "International Bank Transfer (SWIFT)",
+                quote2Header: "Value of Giving",
+                quote2Text: "“Even a small amount you give today can make a meaningful difference in someone’s difficult time—give your support now. 💝🙏”",
+                amountHeading: "How much would you like to give?",
+                amountInstruction: "“Choose an amount that feels comfortable for you, or enter your own amount. Every contribution matters. 💰❤️”",
+                amountSubheading: "Even a small contribution creates meaningful hope.",
+                amtCustomLabel: "Custom Amount",
+                enterAmountLabel: "Enter Custom Amount (NPR):",
+                currencyLabel: "Currency:",
+                amountLabel: "Amount:",
+                intlNotice: "The amount shown is your intended donation amount. Please enter/pay the same amount in your banking/payment app.",
+                quote3Header: "Beginning of Change",
+                quote3Text: "“Your decision to help is where change begins—donate now using the method that is most convenient for you. 🤝💚”",
+                methodHeading: "Select Payment Method",
+                methodInstruction: "“Choose your preferred payment method and continue with your contribution. 📲👇”",
+                methodSubheading: "Choose your preferred payment channel.",
+                quote4Header: "A Step of Hope",
+                quote4Text: "“Your support is now just one scan away—donate now and bring hope to someone facing a difficult time. 📲❤️”",
+                qrInstructionLine: "“Scan the QR code, complete your payment through your payment or banking app, then select ‘I’ve Made My Donation.’ 📱✅”",
+                scanTitle: "Scan to Donate",
+                btnDownloadQr: "Download QR Code",
+                btnIHavePaid: "I’ve Made My Donation",
+                btnChangeMethod: "← Change Payment Method",
+                qrFailText: "Unable to generate the QR code. Please try again.",
+                quote5Header: "Trust & Responsibility",
+                quote5Text: "“You’ve made your contribution—now share a few details to help us record and verify your donation. Your trust is our responsibility. ❤️📝”",
+                formTitle: "Donor Details",
+                formInstruction: "“Enter your name, contact number and Transaction ID. Review your details and click ‘Confirm My Donation.’ 📝✅”",
+                formSubheading: "Submit your payment reference for verification.",
+                labelFullName: "Full Name *",
+                labelPhone: "Mobile Number *",
+                labelTxnId: "Transaction ID / Reference",
+                labelEmail: "Email Address (Optional)",
+                labelAnonymous: "I would like to donate anonymously",
+                btnSubmitForm: "Confirm My Donation",
+                thankYouHeading: "Thank You!",
+                thankYouMessage: "Thank you from the bottom of our hearts. Your contribution may help create positive change in someone's life.",
+                btnReturnHome: "Return to Home Page",
+                btnContinue: "Continue",
+                btnBack: "Go Back",
+                missionTag: "MSR - Make Someone Rise",
+                missionTitle: "Our Mission",
+                missionBody: "To assist economically and socially disadvantaged individuals and families toward self-reliance and a dignified life by providing education, healthcare, food security, emergency relief, skill development, and other essential support.",
+                progTitle: "Key Programs",
+                progSubtitle: "Our primary relief and empowerment programs funded through your voluntary contributions:",
+                prog1Title: "Emergency Assistance",
+                prog1Desc: "Emergency financial aid",
+                prog2Title: "Medical Support",
+                prog2Desc: "Medical care & treatment aid",
+                prog3Title: "Education Support",
+                prog3Desc: "Student scholarships",
+                prog4Title: "Food Support",
+                prog4Desc: "Food security distribution",
+                prog5Title: "Family Support",
+                prog5Desc: "Support for vulnerable families",
+                prog6Title: "Disability Support",
+                prog6Desc: "Assistance for persons with disabilities",
+                prog7Title: "Elderly Support",
+                prog7Desc: "Support for elderly citizens",
+                prog8Title: "Disaster Relief",
+                prog8Desc: "Flood, fire & earthquake relief",
+                prog9Title: "Skill Development",
+                prog9Desc: "Skills & employment training",
+                prog10Title: "Livelihood Support",
+                prog10Desc: "Small business & income generation",
+                transparencyTitle: "We Believe in Transparency",
+                transparencySubtitle: "Every received donation is recorded and subjected to public transparency reports.",
+                trCard1: "Total Received",
+                trCard2: "Support Distributed",
+                trCard3: "Admin Expenses",
+                faqHeading: "Frequently Asked Questions",
+                faq1Q: "How can I donate?",
+                faq1A: "Scan the QR code on our website and donate via eSewa, Khalti, or Direct Bank Transfer.",
+                faq2Q: "Can I donate from outside Nepal?",
+                faq2A: "Yes, select 'International Bank Transfer' for international Wire/SWIFT instructions.",
+                faq3Q: "Can I donate anonymously?",
+                faq3A: "Yes, check the 'Anonymous' option during submission to keep your identity private.",
+                footerTagline: "“Your small contribution can become a powerful force that helps someone rise again.”"
+            }
+        };
+
+        const appState = {
+            language: 'ne',
+            step: 1,
+            region: 'nepal',
+            amount: 1000,
+            currency: 'NPR',
+            paymentMethod: 'esewa',
+            qrInstance: null,
+            latestSubmission: null,
+
+            init() {
+                // Hide preloader smoothly once DOM is ready
+                const preloader = document.getElementById('page-preloader');
+                if (preloader) {
+                    setTimeout(() => {
+                        preloader.classList.add('fade-out');
+                        setTimeout(() => preloader.remove(), 400);
+                    }, 600);
+                }
+
+                this.setLanguage('ne');
+                this.updateStepIndicators();
+            },
+
+            setLanguage(lang) {
+                this.language = lang;
+                const t = TRANSLATIONS[lang];
+
+                const btnNe = document.getElementById('lang-btn-ne');
+                const btnEn = document.getElementById('lang-btn-en');
+                if (lang === 'ne') {
+                    btnNe.className = "px-2.5 py-1 rounded-lg transition-all bg-brand-800 text-white shadow-sm";
+                    btnEn.className = "px-2.5 py-1 rounded-lg transition-all text-slate-600 hover:text-slate-900";
+                } else {
+                    btnEn.className = "px-2.5 py-1 rounded-lg transition-all bg-brand-800 text-white shadow-sm";
+                    btnNe.className = "px-2.5 py-1 rounded-lg transition-all text-slate-600 hover:text-slate-900";
+                }
+
+                document.querySelectorAll('[data-i18n]').forEach(node => {
+                    const key = node.getAttribute('data-i18n');
+                    if (t[key]) {
+                        if (node.tagName === 'INPUT' && node.type === 'placeholder') {
+                            node.placeholder = t[key];
+                        } else {
+                            node.textContent = t[key];
+                        }
+                    }
+                });
+            },
+
+            navigateToSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    section.scrollIntoView({ behavior: 'smooth' });
+                }
+            },
+
+            startDonationFlow() {
+                const modal = document.getElementById('donation-modal-overlay');
+                const mainWrapper = document.getElementById('main-content-wrapper');
+                const header = document.getElementById('site-header');
+                const footer = document.getElementById('site-footer');
+
+                modal.classList.remove('hidden');
+                mainWrapper.classList.add('modal-blur-active');
+                header.classList.add('modal-blur-active');
+                footer.classList.add('modal-blur-active');
+                document.body.style.overflow = 'hidden';
+
+                this.navigateToStep(1);
+            },
+
+            closeDonationFlow() {
+                const modal = document.getElementById('donation-modal-overlay');
+                const mainWrapper = document.getElementById('main-content-wrapper');
+                const header = document.getElementById('site-header');
+                const footer = document.getElementById('site-footer');
+
+                modal.classList.add('hidden');
+                mainWrapper.classList.remove('modal-blur-active');
+                header.classList.remove('modal-blur-active');
+                footer.classList.remove('modal-blur-active');
+                document.body.style.overflow = 'auto';
+                this.navigateToSection('home');
+            },
+
+            navigateToStep(stepNum) {
+                this.step = stepNum;
+                for (let i = 1; i <= 6; i++) {
+                    const el = document.getElementById(`flow-step-${i}`);
+                    if (el) {
+                        if (i === stepNum) {
+                            el.classList.remove('view-hidden');
+                            el.classList.add('view-active');
+                        } else {
+                            el.classList.add('view-hidden');
+                            el.classList.remove('view-active');
+                        }
+                    }
+                }
+                this.updateStepIndicators();
+            },
+
+            updateStepIndicators() {
+                for (let i = 1; i <= 4; i++) {
+                    const el = document.getElementById(`step-indicator-${i}`);
+                    if (el) {
+                        if (i <= this.step) {
+                            el.className = "flex items-center gap-1 text-brand-800 font-bold";
+                            el.querySelector('span').className = "w-5 h-5 rounded-full bg-brand-800 text-white flex items-center justify-center text-[10px]";
+                        } else {
+                            el.className = "flex items-center gap-1 text-slate-400 font-normal";
+                            el.querySelector('span').className = "w-5 h-5 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center text-[10px]";
+                        }
+                    }
+                }
+            },
+
+            selectRegion(reg) {
+                this.region = reg;
+                if (reg === 'nepal') {
+                    this.currency = 'NPR';
+                    document.getElementById('container-amount-nepal').classList.remove('hidden');
+                    document.getElementById('container-amount-intl').classList.add('hidden');
+                    document.getElementById('methods-nepal-grid').classList.remove('hidden');
+                    document.getElementById('methods-intl-grid').classList.add('hidden');
+                } else {
+                    this.currency = document.getElementById('select-intl-currency').value;
+                    document.getElementById('container-amount-nepal').classList.add('hidden');
+                    document.getElementById('container-amount-intl').classList.remove('hidden');
+                    document.getElementById('methods-nepal-grid').classList.add('hidden');
+                    document.getElementById('methods-intl-grid').classList.remove('hidden');
+                }
+                this.navigateToStep(2);
+            },
+
+            setPresetAmount(val) {
+                this.amount = val;
+                document.querySelectorAll('.btn-amt-preset').forEach(b => {
+                    b.className = "btn-amt-preset p-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm font-bold text-slate-700 hover:border-brand-800 hover:bg-brand-50 transition-all";
+                });
+                event.target.className = "btn-amt-preset p-2.5 rounded-xl border-2 border-brand-800 bg-brand-50 text-xs sm:text-sm font-bold text-brand-900 transition-all";
+                document.getElementById('wrapper-custom-amt').classList.add('hidden');
+            },
+
+            toggleCustomAmountInput() {
+                document.getElementById('wrapper-custom-amt').classList.remove('hidden');
+            },
+
+            submitAmountStep() {
+                if (this.region === 'nepal') {
+                    const customInput = document.getElementById('input-custom-amt-nepal');
+                    if (!document.getElementById('wrapper-custom-amt').classList.contains('hidden') && customInput.value) {
+                        this.amount = Math.max(10, Number(customInput.value));
+                    }
+                } else {
+                    this.currency = document.getElementById('select-intl-currency').value;
+                    this.amount = Math.max(1, Number(document.getElementById('input-intl-amt').value));
+                }
+                this.navigateToStep(3);
+            },
+
+            selectPaymentMethod(method) {
+                this.paymentMethod = method;
+                this.navigateToStep(4);
+                this.generateQR();
+            },
+
+            generateQR() {
+                const target = document.getElementById('qrcode-canvas-target');
+                const failBox = document.getElementById('qr-fail-box');
+                
+                if (!target) return;
+                target.innerHTML = '';
+                failBox.classList.add('hidden');
+
+                if (typeof QRCode === "undefined") {
+                    console.error("QRCode engine undefined.");
+                    failBox.classList.remove('hidden');
+                    return;
+                }
+
+                let payload = "";
+                if (this.region === 'nepal') {
+                    payload = QR_PAYLOADS.nepal[this.paymentMethod] || QR_PAYLOADS.nepal.bank;
+                } else {
+                    payload = QR_PAYLOADS.international.bank;
+                }
+
+                try {
+                    this.qrInstance = new QRCode(target, {
+                        text: payload,
+                        width: 180,
+                        height: 180,
+                        colorDark: "#000000",
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+
+                    document.getElementById('display-qr-amount').textContent = `${this.currency} ${this.amount.toLocaleString()}`;
+                    document.getElementById('display-qr-method-label').textContent = `${this.paymentMethod.toUpperCase()} QR`;
+                } catch (err) {
+                    console.error("QR Generation error:", err);
+                    failBox.classList.remove('hidden');
+                }
+            },
+
+            retryQRGeneration() {
+                this.generateQR();
+            },
+
+            downloadQRCodeImage() {
+                const target = document.getElementById('qrcode-canvas-target');
+                const canvas = target.querySelector('canvas');
+                const img = target.querySelector('img');
+
+                let imageUrl = "";
+                if (canvas) {
+                    imageUrl = canvas.toDataURL("image/png");
+                } else if (img) {
+                    imageUrl = img.src;
+                }
+
+                if (!imageUrl) {
+                    alert("QR Code not ready yet.");
+                    return;
+                }
+
+                const downloadLink = document.createElement('a');
+                downloadLink.href = imageUrl;
+                downloadLink.download = `MSR-HopeHelp-${this.paymentMethod.toUpperCase()}-QR.png`;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            },
+
+            handleDonorSubmit(e) {
+                e.preventDefault();
+
+                const name = document.getElementById('input-donor-name').value;
+                const phone = document.getElementById('input-donor-phone').value;
+                const txnid = document.getElementById('input-donor-txnid').value;
+                const email = document.getElementById('input-donor-email').value;
+                const isAnon = document.getElementById('check-anonymous').checked;
+
+                const generatedRef = `HH-2026-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+
+                this.latestSubmission = {
+                    id: generatedRef,
+                    donorName: isAnon ? (this.language === 'ne' ? 'गोप्य दाता' : 'Anonymous') : name,
+                    rawName: name,
+                    phone: phone,
+                    email: email,
+                    txnId: txnid,
+                    amount: this.amount,
+                    currency: this.currency,
+                    method: this.paymentMethod,
+                    region: this.region,
+                    status: 'PENDING_VERIFICATION'
+                };
+
+                document.getElementById('res-donation-id').textContent = generatedRef;
+                document.getElementById('res-donation-amt').textContent = `${this.currency} ${this.amount.toLocaleString()}`;
+                
+                // Clear and reset the recent region to form activities after Submit Donation Details with default amount 1000
+                document.getElementById('form-donor-submit').reset();
+                const qrTarget = document.getElementById('qrcode-canvas-target');
+                if (qrTarget) qrTarget.innerHTML = '';
+                this.region = 'nepal';
+                this.amount = 1000;
+                this.paymentMethod = 'esewa';
+                const customInput = document.getElementById('input-custom-amt-nepal');
+                if (customInput) customInput.value = '';
+                const customWrapper = document.getElementById('wrapper-custom-amt');
+                if (customWrapper) customWrapper.classList.add('hidden');
+
+                this.navigateToStep(6);
+            },
+
+            openWhatsAppNotification() {
+                if (!this.latestSubmission) return;
+                const sub = this.latestSubmission;
+
+                const message = encodeURIComponent(
+                    `*MSR — HOPE & HELP DONATION SUBMISSION*\n\n` +
+                    `Donation ID: ${sub.id}\n` +
+                    `Donor: ${sub.donorName}\n` +
+                    `Amount: ${sub.currency} ${sub.amount}\n` +
+                    `Region: ${sub.region.toUpperCase()}\n` +
+                    `Payment Method: ${sub.method.toUpperCase()}\n` +
+                    `Txn Ref: ${sub.txnId || 'N/A'}\n` +
+                    `Phone: ${sub.phone}\n` +
+                    `Email: ${sub.email || 'N/A'}\n` +
+                    `Status: PENDING_VERIFICATION`
+                );
+
+                window.open(`https://wa.me/${CONFIG.whatsappAdmin}?text=${message}`, '_blank');
+            },
+
+            resetFlow() {
+                this.amount = 1000;
+                this.region = 'nepal';
+                this.paymentMethod = 'esewa';
+                document.getElementById('form-donor-submit').reset();
+                const qrTarget = document.getElementById('qrcode-canvas-target');
+                if (qrTarget) qrTarget.innerHTML = '';
+                const customInput = document.getElementById('input-custom-amt-nepal');
+                if (customInput) customInput.value = '';
+                const customWrapper = document.getElementById('wrapper-custom-amt');
+                if (customWrapper) customWrapper.classList.add('hidden');
+                this.navigateToStep(1);
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            appState.init();
+        });
+    </script>
+</body>
+</html>
+
