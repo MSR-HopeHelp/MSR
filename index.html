@@ -766,8 +766,8 @@
                         </div>
 
                         <!-- QR CODE CANVAS CONTAINER -->
-                        <div class="bg-white p-3 rounded-2xl border-2 border-slate-100 shadow-inner inline-block">
-                            <div id="qrcode-canvas-target" class="w-[180px] h-[180px] sm:w-[210px] sm:h-[210px] flex items-center justify-center bg-slate-50 rounded-xl overflow-hidden">
+                        <div class="bg-white p-3.5 rounded-2xl border-2 border-slate-100 shadow-inner inline-block">
+                            <div id="qrcode-canvas-target" class="w-[180px] h-[180px] sm:w-[210px] sm:h-[210px] flex items-center justify-center bg-white rounded-xl overflow-hidden">
                                 <!-- QR Render Target -->
                             </div>
                         </div>
@@ -1023,7 +1023,7 @@
                 quote3Text: "सहयोग गर्ने तपाईंको निर्णयले नै परिवर्तनको सुरुवात गर्छ—अहिले नै आफूलाई सहज हुने माध्यमबाट दान गर्नुहोस्। 🤝💚",
                 methodHeading: "भुक्तानी माध्यम छान्नुहोस्",
                 methodInstruction: "उपलब्ध माध्यममध्ये आफूलाई सहज हुने payment method छान्नुहोस् र आफ्नो सहयोग अघि बढाउनुहोस्। 📲👇",
-                methodSubheading: "कृपया आफूलाई सहज हुने माध्यम रोज्नुहोस्।",
+                methodSubheading: "कृपया भुक्तानी माध्यम छनोटका लागि स्थान रोज्नुहोस्।",
                 quote4Header: "आशाको एक कदम",
                 quote4Text: "अब तपाईंको सहयोग केवल एक Scan टाढा छ—अहिले नै दान गर्नुहोस्, कसैको कठिन समयमा आशा बनिदिनुहोस्। 📲❤️",
                 qrInstructionLine: "QR Code Scan गर्नुहोस्, आफ्नो payment app वा banking app बाट भुक्तानी पूरा गर्नुहोस्, अनि ‘मैले सहयोग गरिसकेँ’ चयन गर्नुहोस्। 📱✅",
@@ -1428,29 +1428,31 @@
                     return;
                 }
 
-                // Create padded canvas (adding 32px padding on all sides with white background)
-                const padding = 32;
+                // Add professional generous padding and distinct text padding for scannability
+                const padding = 40;
+                const topTextHeight = 65;
                 const paddedCanvas = document.createElement('canvas');
                 paddedCanvas.width = sourceCanvas.width + (padding * 2);
-                paddedCanvas.height = sourceCanvas.height + (padding * 2) + 50; // extra space for text at the top
+                paddedCanvas.height = sourceCanvas.height + (padding * 2) + topTextHeight;
                 const pCtx = paddedCanvas.getContext('2d');
 
-                // Fill background white
+                // Fill clean solid white background
                 pCtx.fillStyle = '#ffffff';
                 pCtx.fillRect(0, 0, paddedCanvas.width, paddedCanvas.height);
 
-                // Draw method and amount title at the top
+                // Draw Method Name / Title at the Top with comfortable padding space
                 pCtx.fillStyle = '#166534';
-                pCtx.font = 'bold 16px Poppins, sans-serif';
+                pCtx.font = 'bold 18px Poppins, sans-serif';
                 pCtx.textAlign = 'center';
-                pCtx.fillText('MSR — ' + this.paymentMethod.toUpperCase() + ' QR', paddedCanvas.width / 2, 30);
+                pCtx.fillText('MSR — ' + this.paymentMethod.toUpperCase() + ' QR', paddedCanvas.width / 2, 35);
 
+                // Draw Amount with padding separation
                 pCtx.fillStyle = '#17201a';
-                pCtx.font = '12px Inter, sans-serif';
-                pCtx.fillText(`${this.currency} ${this.amount.toLocaleString()}`, paddedCanvas.width / 2, 48);
+                pCtx.font = 'bold 14px Inter, sans-serif';
+                pCtx.fillText(`${this.currency} ${this.amount.toLocaleString()}`, paddedCanvas.width / 2, 58);
 
-                // Draw the QR code image centered with padding
-                pCtx.drawImage(sourceCanvas, padding, padding + 20);
+                // Draw the QR code image centered with wide white padding around it
+                pCtx.drawImage(sourceCanvas, padding, topTextHeight + 10);
 
                 const imageUrl = paddedCanvas.toDataURL("image/png");
                 const downloadLink = document.createElement('a');
