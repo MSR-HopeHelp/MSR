@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSR - Official Printable QR Counter Standee Board</title>
+    <title>MSR - Printable QR Donation Board</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,17 +18,17 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f2f7f4',
-                            100: '#e1ede6',
-                            700: '#134e38',
-                            800: '#0c3824',
-                            900: '#0a2918',
-                            950: '#05180e',
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            950: '#052e16',
                         },
                         gold: {
-                            400: '#e2be6e',
-                            500: '#c59b27',
-                            600: '#a37a1a',
+                            400: '#d97706',
+                            500: '#b45309',
                         }
                     },
                     fontFamily: {
@@ -93,7 +93,7 @@
             .print-grid {
                 display: grid !important;
                 grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-                gap: 1rem !important;
+                gap: 0.85rem !important;
             }
         }
     </style>
@@ -103,62 +103,68 @@
     <!-- PRINT / SAVE ACTION BAR -->
     <div class="no-print mb-3 sm:mb-4 w-full max-w-2xl flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-3 bg-white p-3.5 rounded-2xl shadow-lg border border-slate-300">
         <div class="flex items-center gap-2.5 text-center sm:text-left">
-            <span class="w-3 h-3 rounded-full bg-emerald-600 animate-pulse shrink-0"></span>
-            <span class="text-xs sm:text-sm font-bold text-slate-900 tracking-wide">MSR Official Counter Payment Standee</span>
+            <span class="w-3.5 h-3.5 rounded-full bg-emerald-600 animate-pulse shrink-0"></span>
+            <span class="text-xs sm:text-sm font-black text-slate-900 tracking-wide uppercase">MSR Counter Donation Board</span>
         </div>
-        <button onclick="window.print()" class="w-full sm:w-auto bg-brand-900 hover:bg-brand-950 active:scale-95 text-white font-bold px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer border border-gold-500/30">
-            <svg class="w-4 h-4 fill-current text-gold-400" viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
-            <span>Print Counter Standee / Save PDF</span>
+        <button onclick="window.print()" class="w-full sm:w-auto bg-brand-800 hover:bg-brand-900 text-white font-bold px-6 py-2.5 rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer border border-brand-700 active:scale-95">
+            <svg class="w-4 h-4 fill-current text-brand-100" viewBox="0 0 24 24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+            <span>Print Poster / Save PDF</span>
         </button>
     </div>
 
-    <!-- MAIN PRINTABLE STANDEE BOARD (MINIMALIST PREMIUM A4 STANDEE) -->
-    <div class="print-card w-full max-w-2xl bg-white rounded-3xl shadow-2xl border-2 border-slate-300 overflow-hidden relative flex flex-col justify-between my-auto">
+    <!-- MAIN PRINTABLE STANDEE BOARD (LIGHT, CLEAN & HIGH DENSITY A4 BOARD) -->
+    <div class="print-card w-full max-w-2xl bg-white rounded-[28px] shadow-2xl border-2 border-slate-300 overflow-hidden relative flex flex-col justify-between my-auto">
         
-        <!-- FINE INNER BORDER ACCENT -->
+        <!-- FINE INNER ACCENT BORDER -->
         <div class="absolute inset-1.5 border border-slate-200/80 rounded-[22px] pointer-events-none z-20"></div>
 
         <!-- TOP MINIMAL BRAND BAR -->
-        <div class="bg-brand-950 px-6 py-2 flex items-center justify-between text-white border-b border-gold-500/30 shrink-0 relative z-10">
+        <div class="bg-brand-900 px-6 py-2 flex items-center justify-between text-white border-b border-brand-800 shrink-0 relative z-10">
             <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-gold-400"></span>
-                <span class="text-[10px] sm:text-xs font-semibold tracking-widest text-slate-300 uppercase">Official Contribution Portal</span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="text-[10px] sm:text-xs font-black uppercase tracking-widest text-emerald-200">Humanitarian Aid Portal</span>
             </div>
-            <span class="text-[10px] sm:text-xs font-bold tracking-widest text-gold-400 uppercase">MSR — Make Someone Rise</span>
+            <span class="text-[10px] sm:text-xs font-black uppercase tracking-widest text-emerald-100">MSR — Make Someone Rise</span>
         </div>
 
-        <!-- HEADER SECTION (DEEP FOREST GREEN & CRISP TYPOGRAPHY) -->
-        <div class="bg-brand-900 text-white px-6 py-6 sm:px-8 sm:py-7 text-center relative shrink-0 border-b-2 border-gold-500/40">
+        <!-- HEADER SECTION (DEEP ELEGANT FOREST GREEN & CLEAN TYPOGRAPHY) -->
+        <div class="bg-brand-900 text-white px-6 py-6 sm:px-8 sm:py-7 text-center relative shrink-0 border-b-4 border-brand-700 shadow-xs">
             
+            <!-- SEAL BADGE TOP RIGHT -->
+            <div class="absolute top-4 right-4 hidden sm:flex items-center gap-1.5 bg-white/10 text-emerald-100 font-bold text-[10px] uppercase px-3.5 py-1 rounded-full border border-white/20">
+                <svg class="w-3.5 h-3.5 fill-current text-emerald-300" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                <span>१००% प्रमाणित परोपकारी संस्था</span>
+            </div>
+
             <div class="relative z-10 space-y-2">
                 
-                <!-- BRAND ICON & TITLE -->
-                <div class="inline-flex items-center gap-2 bg-white/10 px-3.5 py-1 rounded-full border border-white/15">
-                    <svg class="w-4 h-4 text-gold-400 stroke-current stroke-2 fill-none" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                <!-- TOP EMBLEM & BRAND -->
+                <div class="inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/15">
+                    <svg class="w-5 h-5 text-emerald-300 stroke-current stroke-2 fill-none" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 4a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
                         <path d="M6 10c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v3a1 1 0 0 1-1 1h-2v6a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-6H7a1 1 0 0 1-1-1v-3z"/>
                         <path d="M12 12l3-3m-6 0l3 3"/>
                     </svg>
-                    <span class="font-heading font-bold text-xs tracking-wider text-gold-400 uppercase">Hope & Help Initiative</span>
+                    <span class="font-heading font-black text-xs sm:text-sm tracking-widest text-emerald-200 uppercase">MSR — Make Someone Rise</span>
                 </div>
 
-                <h1 class="text-2xl sm:text-4xl font-heading font-bold text-white tracking-tight uppercase leading-tight">
+                <h1 class="text-3xl sm:text-4xl font-heading font-black text-white tracking-tight uppercase leading-tight">
                     मानवीय सहयोग अभियान
                 </h1>
                 
                 <div class="flex items-center justify-center gap-3 pt-0.5">
-                    <span class="h-px w-10 bg-gold-500/40"></span>
-                    <p class="text-slate-300 text-xs sm:text-sm font-medium tracking-widest uppercase">
-                        Empowering Lives Together
+                    <span class="h-0.5 w-10 bg-emerald-500/40"></span>
+                    <p class="text-emerald-100 text-xs sm:text-sm font-extrabold tracking-widest uppercase">
+                        तपाईंको सहयोग, कसैको जीवनको नयाँ आशा!
                     </p>
-                    <span class="h-px w-10 bg-gold-500/40"></span>
+                    <span class="h-0.5 w-10 bg-emerald-500/40"></span>
                 </div>
 
             </div>
         </div>
 
-        <!-- TRUSTWORTHY QUOTE BANNER 1 (WARM IVORY MINIMAL CARD) -->
-        <div class="bg-amber-50/80 border-b border-amber-200/60 px-6 py-3.5 text-center shrink-0">
+        <!-- TRUSTWORTHY QUOTE BANNER 1 (CLEAN WARM IVORY CARD) -->
+        <div class="bg-slate-50 border-b border-slate-200 px-6 py-3.5 text-center shrink-0 relative z-10">
             <p class="text-xs sm:text-sm text-slate-900 font-bold leading-relaxed">
                 “तपाईंले आज गर्ने सानो दानले कसैको ठूलो आवश्यकता पूरा हुन्छ; तपाईंले बाँडेको सहयोगको माध्यमबाट ईश्वरले तपाईंको जीवनमा अझ धेरै बरकत र समृद्धि ल्याउनुहुन्छ।” 🤲❤️
             </p>
@@ -167,129 +173,154 @@
             </p>
         </div>
 
-        <!-- BODY: 3 QR CODES CONTAINER (CLEAN MINIMAL GRID) -->
-        <div class="p-5 sm:p-7 space-y-4 flex-1 flex flex-col justify-between bg-slate-50/50">
+        <!-- BODY: 3 QR CODES CONTAINER (CLEAN & HIGH DENSITY PACKED) -->
+        <div class="p-5 sm:p-7 space-y-4 flex-1 flex flex-col justify-between bg-white relative z-10">
             
             <div class="text-center space-y-1">
-                <span class="inline-block bg-brand-100 text-brand-900 text-[10px] font-bold uppercase tracking-wider px-3 py-0.5 rounded-full border border-brand-200">
-                    Scan & Donate Directly
+                <span class="inline-block bg-brand-50 text-brand-900 text-[10px] font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full border border-brand-200">
+                    SCAN ANY QR CODE TO DONATE NOW
                 </span>
-                <h2 class="text-lg sm:text-xl font-heading font-bold text-slate-900 uppercase tracking-wide">
-                    सबै डिजिटल वालेट तथा बैंक QR हरू उपलब्ध छन्
+                <h2 class="text-xl sm:text-2xl font-heading font-bold text-slate-900 uppercase tracking-wide">
+                    सबै वालेट तथा बैंक QR हरू उपलब्ध छन्
                 </h2>
-                <p class="text-xs text-slate-600 font-medium">
-                    eSewa, Khalti वा Fonepay / Mobile Banking एपबाट सजिलै सहयोग गर्न सक्नुहुन्छ।
+                <p class="text-xs text-slate-600 font-semibold">
+                    eSewa, Khalti वा Fonepay / Mobile Banking एपबाट तुरुन्तै स्वेच्छिक सहयोग गर्नुहोस्।
                 </p>
             </div>
 
-            <!-- GRID FOR 3 QRS (MINIMALIST BORDERS & CRISP QR DISPLAY) -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 print-grid gap-4 items-stretch">
+            <!-- GRID FOR 3 QRS (FULL-WIDTH EVEN DISTRIBUTION) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 print-grid gap-3.5 items-stretch">
                 
                 <!-- 1. ESEWA QR CARD -->
-                <div class="bg-white border border-slate-200 hover:border-emerald-600/50 rounded-2xl p-3 sm:p-4 text-center flex flex-col justify-between items-center shadow-sm">
-                    <div class="w-full space-y-2">
-                        <div class="bg-emerald-800 text-white font-heading font-bold text-xs py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <div class="bg-slate-50/80 border-2 border-emerald-600/50 rounded-2xl p-3 text-center flex flex-col justify-between items-center shadow-xs relative overflow-hidden">
+                    <div class="w-full space-y-1.5">
+                        <div class="bg-emerald-700 text-white font-heading font-black text-xs sm:text-sm py-1.5 px-2 rounded-xl flex items-center justify-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-300"></span>
                             <span>eSewa QR</span>
                         </div>
-                        <div class="bg-slate-50 p-2 sm:p-2.5 rounded-xl border border-slate-200 my-1 inline-block">
+                        <div class="bg-white p-2 rounded-2xl border border-slate-200 shadow-inner my-1 inline-block">
                             <div id="qr-esewa" class="flex justify-center items-center"></div>
                         </div>
                     </div>
-                    <div class="w-full pt-2 border-t border-slate-100 mt-1">
+                    <div class="w-full pt-1.5 border-t border-slate-200 mt-1">
                         <span class="text-[11px] font-bold text-slate-900 block uppercase">eSewa Wallet</span>
-                        <span class="text-[9px] font-semibold text-slate-500 uppercase">Direct Wallet Payment</span>
+                        <span class="text-[9px] font-semibold text-slate-600 block">Instant Direct Aid</span>
                     </div>
                 </div>
 
                 <!-- 2. KHALTI QR CARD -->
-                <div class="bg-white border border-slate-200 hover:border-purple-600/50 rounded-2xl p-3 sm:p-4 text-center flex flex-col justify-between items-center shadow-sm">
-                    <div class="w-full space-y-2">
-                        <div class="bg-purple-900 text-white font-heading font-bold text-xs py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                <div class="bg-slate-50/80 border-2 border-purple-600/50 rounded-2xl p-3 text-center flex flex-col justify-between items-center shadow-xs relative overflow-hidden">
+                    <div class="w-full space-y-1.5">
+                        <div class="bg-purple-800 text-white font-heading font-black text-xs sm:text-sm py-1.5 px-2 rounded-xl flex items-center justify-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-purple-300"></span>
                             <span>Khalti QR</span>
                         </div>
-                        <div class="bg-slate-50 p-2 sm:p-2.5 rounded-xl border border-slate-200 my-1 inline-block">
+                        <div class="bg-white p-2 rounded-2xl border border-slate-200 shadow-inner my-1 inline-block">
                             <div id="qr-khalti" class="flex justify-center items-center"></div>
                         </div>
                     </div>
-                    <div class="w-full pt-2 border-t border-slate-100 mt-1">
+                    <div class="w-full pt-1.5 border-t border-slate-200 mt-1">
                         <span class="text-[11px] font-bold text-slate-900 block uppercase">Khalti Wallet</span>
-                        <span class="text-[9px] font-semibold text-slate-500 uppercase">Direct Wallet Payment</span>
+                        <span class="text-[9px] font-semibold text-slate-600 block">Instant Direct Aid</span>
                     </div>
                 </div>
 
                 <!-- 3. BANK QR CARD -->
-                <div class="bg-white border border-slate-200 hover:border-blue-600/50 rounded-2xl p-3 sm:p-4 text-center flex flex-col justify-between items-center shadow-sm">
-                    <div class="w-full space-y-2">
-                        <div class="bg-slate-800 text-white font-heading font-bold text-xs py-1.5 px-3 rounded-lg flex items-center justify-center gap-1.5">
-                            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+                <div class="bg-slate-50/80 border-2 border-blue-600/50 rounded-2xl p-3 text-center flex flex-col justify-between items-center shadow-xs relative overflow-hidden">
+                    <div class="w-full space-y-1.5">
+                        <div class="bg-slate-800 text-white font-heading font-black text-xs sm:text-sm py-1.5 px-2 rounded-xl flex items-center justify-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-blue-300"></span>
                             <span>Bank / Fonepay</span>
                         </div>
-                        <div class="bg-slate-50 p-2 sm:p-2.5 rounded-xl border border-slate-200 my-1 inline-block">
+                        <div class="bg-white p-2 rounded-2xl border border-slate-200 shadow-inner my-1 inline-block">
                             <div id="qr-bank" class="flex justify-center items-center"></div>
                         </div>
                     </div>
-                    <div class="w-full pt-2 border-t border-slate-100 mt-1">
-                        <span class="text-[11px] font-bold text-slate-900 block uppercase">Mobile Banking</span>
-                        <span class="text-[9px] font-semibold text-slate-500 uppercase">Fonepay / connectIPS</span>
+                    <div class="w-full pt-1.5 border-t border-slate-200 mt-1">
+                        <span class="text-[11px] font-bold text-slate-900 block uppercase">All Banking Apps</span>
+                        <span class="text-[9px] font-semibold text-slate-600 block">Fonepay / IPS</span>
                     </div>
                 </div>
 
             </div>
 
-            <!-- HOW TO DONATE 3-STEP PROCESS (CLEAN & RESTRAINED) -->
-            <div class="bg-white border border-slate-200 rounded-xl p-3 text-center shadow-xs">
-                <div class="grid grid-cols-3 gap-2 text-xs divide-x divide-slate-200">
-                    <div class="px-2 space-y-0.5">
-                        <span class="font-bold text-brand-800 text-xs block uppercase">1. Select App</span>
-                        <span class="text-[10px] text-slate-500 block">एप खोल्नुहोस्</span>
+            <!-- DIRECT IMPACT BREAKDOWN GRID -->
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 shadow-xs space-y-2">
+                <span class="text-[10px] font-extrabold text-brand-900 uppercase tracking-widest block text-center">तपाईंको सहयोगको प्रत्यक्ष प्रभाव (Direct Impact Of Your Gift)</span>
+                <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                    <div class="p-2 rounded-xl bg-white border border-slate-200 space-y-0.5">
+                        <span class="font-black text-brand-800 text-xs sm:text-sm block">रु १००</span>
+                        <span class="text-[10px] text-slate-600 font-bold block">विद्यार्थीलाई किताब / कापी</span>
                     </div>
-                    <div class="px-2 space-y-0.5">
-                        <span class="font-bold text-brand-800 text-xs block uppercase">2. Scan QR</span>
-                        <span class="text-[10px] text-slate-500 block">क्यूआर स्क्यान गर्नुहोस्</span>
+                    <div class="p-2 rounded-xl bg-white border border-slate-200 space-y-0.5">
+                        <span class="font-black text-brand-800 text-xs sm:text-sm block">रु ५००</span>
+                        <span class="text-[10px] text-slate-600 font-bold block">१ परिवारलाई खाद्यान्न</span>
                     </div>
-                    <div class="px-2 space-y-0.5">
-                        <span class="font-bold text-brand-800 text-xs block uppercase">3. Complete</span>
-                        <span class="text-[10px] text-slate-500 block">सहयोग पूरा गर्नुहोस्</span>
+                    <div class="p-2 rounded-xl bg-white border border-slate-200 space-y-0.5">
+                        <span class="font-black text-brand-800 text-xs sm:text-sm block">रु १०००+</span>
+                        <span class="text-[10px] text-slate-600 font-bold block">बिरामीलाई औषधि / उपचार</span>
                     </div>
                 </div>
             </div>
 
-            <!-- TRUSTWORTHY QUOTE BANNER 2 -->
-            <div class="bg-emerald-50/80 border border-emerald-200/80 p-3.5 rounded-xl text-center space-y-0.5">
-                <p class="text-xs sm:text-sm text-slate-900 font-bold leading-relaxed">
+            <!-- HOW TO DONATE 3-STEP PROCESS -->
+            <div class="bg-slate-100 border border-slate-200 text-slate-800 rounded-2xl p-3 shadow-xs">
+                <div class="flex items-center justify-between text-center divide-x divide-slate-300">
+                    <div class="w-1/3 px-2 space-y-0.5">
+                        <span class="bg-brand-800 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full inline-block">चरण १</span>
+                        <p class="text-[11px] font-bold block">एप खोल्नुहोस्</p>
+                    </div>
+                    <div class="w-1/3 px-2 space-y-0.5">
+                        <span class="bg-brand-800 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full inline-block">चरण २</span>
+                        <p class="text-[11px] font-bold block">क्यूआर स्क्यान गर्नुहोस्</p>
+                    </div>
+                    <div class="w-1/3 px-2 space-y-0.5">
+                        <span class="bg-brand-800 text-white font-bold text-[10px] px-2.5 py-0.5 rounded-full inline-block">चरण ३</span>
+                        <p class="text-[11px] font-bold block">सहयोग पूरा गर्नुहोस्</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRUSTWORTHY QUOTE BANNER 2 (SOFT EMERALD CARD) -->
+            <div class="bg-emerald-50/90 border border-emerald-200 p-3.5 rounded-2xl text-center space-y-1 shadow-xs">
+                <p class="text-xs sm:text-sm font-bold text-emerald-950 leading-relaxed">
                     “दान गर्दा धन घट्दैन—कसैको दुःख घट्छ, र ईश्वरको कृपाले तपाईंको जीवनमा बरकत बढ्छ।” 🤲💰
                 </p>
-                <p class="text-[10px] text-slate-600 font-medium italic">
+                <p class="text-[10px] font-medium italic text-emerald-800">
                     “Giving does not diminish your wealth—it reduces someone's hardship, while God's grace brings greater blessings into your life.”
                 </p>
             </div>
 
         </div>
 
-        <!-- FOOTER SECTION (MINIMAL DARK SLATE) -->
-        <div class="bg-brand-950 text-white p-4 sm:p-5 text-center space-y-1 border-t border-gold-500/30 shrink-0">
-            <div class="flex items-center justify-center gap-3 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-gold-400">
-                <span>100% Transparent</span>
+        <!-- FOOTER SECTION -->
+        <div class="bg-brand-950 text-white p-4 sm:p-5 text-center space-y-1.5 border-t border-brand-800 shrink-0 relative z-10">
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-emerald-300">
+                <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 fill-current text-emerald-400" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    १००% पारदर्शी प्रणाली
+                </span>
                 <span>•</span>
-                <span>Direct Beneficiary Impact</span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5 fill-current text-emerald-400" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    प्रत्यक्ष पिडित/सहयोगी पहुँच
+                </span>
                 <span>•</span>
-                <span>Verified Non-Profit</span>
+                <span>नेपाल सरकार मान्यता प्राप्त अभियान</span>
             </div>
 
-            <p class="text-xs text-slate-300 font-medium pt-0.5">
-                MSR — Make Someone Rise | Official Portal: <span class="text-white font-bold underline decoration-gold-400">msr.com.np</span>
+            <p class="text-xs sm:text-sm text-slate-200 font-bold">
+                MSR — Make Someone Rise | आधिकारिक पोर्टल: <span class="text-emerald-300 font-black underline">msr.com.np</span>
             </p>
             
-            <p class="text-[9px] text-slate-400 font-normal">
+            <p class="text-[9px] sm:text-[10px] text-slate-400 font-medium">
                 All Rights Reserved © 2026 MSR — Make Someone Rise (Hope & Help Initiative)
             </p>
         </div>
 
     </div>
 
-    <!-- QR GENERATION SCRIPT WITH RESPONSIVE DENSITY -->
+    <!-- QR GENERATION SCRIPT WITH RESPONSIVE FLUID SIZING -->
     <script>
         const QR_PAYLOADS = {
             esewa: '{"eSewa_id":"9807648317","name":"Isul Kawari"}',
@@ -299,7 +330,7 @@
 
         function renderQRCodes() {
             const isMobile = window.innerWidth < 640;
-            const qrSize = isMobile ? Math.min(window.innerWidth - 120, 140) : 155;
+            const qrSize = isMobile ? Math.min(window.innerWidth - 120, 140) : 165;
 
             document.getElementById("qr-esewa").innerHTML = "";
             document.getElementById("qr-khalti").innerHTML = "";
@@ -310,7 +341,7 @@
                 text: QR_PAYLOADS.esewa,
                 width: qrSize,
                 height: qrSize,
-                colorDark: "#0a2918",
+                colorDark: "#0c3824",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
             });
@@ -338,6 +369,7 @@
 
         document.addEventListener("DOMContentLoaded", renderQRCodes);
 
+        // Re-render QR codes on window resize/orientation change for optimal scannability
         let resizeTimer;
         window.addEventListener("resize", () => {
             clearTimeout(resizeTimer);
