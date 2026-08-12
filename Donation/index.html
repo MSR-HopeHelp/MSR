@@ -61,18 +61,19 @@
             background-opacity: 0.05;
         }
 
-        /* Clean QR Wrapper Styling with Solid White Background to prevent color overlap */
+        /* Clean QR Wrapper Styling with Solid White Background & Anti-Blur Properties */
         .qr-box-clean {
             background-color: #ffffff !important;
             background: #ffffff !important;
-            padding: 6px !important;
+            padding: 5px !important;
             border-radius: 8px !important;
             border: 1px solid #cbd5e1 !important;
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
-            margin: 4px 0 !important;
+            margin: 3px 0 !important;
             box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+            transform: translateZ(0);
         }
 
         .qr-box-clean canvas, .qr-box-clean img {
@@ -80,6 +81,11 @@
             background: #ffffff !important;
             display: block !important;
             margin: 0 auto !important;
+            width: 74px !important;
+            height: 74px !important;
+            image-rendering: pixelated !important;
+            image-rendering: crisp-edges !important;
+            -ms-interpolation-mode: nearest-neighbor !important;
         }
 
         @media print {
@@ -171,11 +177,11 @@
             
             <div class="text-center">
                 <span class="inline-block bg-brand-100 text-brand-950 text-[8.5px] font-black uppercase tracking-wider px-3.5 py-1 rounded-full border border-brand-300 shadow-xs">
-                    Scan with any wallet or banking app to donate.
+                    Scan with any Wallet or Mobile Banking.
                 </span>
             </div>
 
-            <!-- GRID FOR 3 QRS WITH CLEAN MONOCHROME QR CODES -->
+            <!-- GRID FOR 3 QRS WITH HIGH-DENSITY ZOOM-SCANNABLE QR CODES -->
             <div class="grid grid-cols-3 print-grid gap-1.5 items-stretch">
                 
                 <!-- 1. ESEWA QR -->
@@ -240,7 +246,7 @@
 
     </div>
 
-    <!-- QR GENERATION SCRIPT WITH CLEAN SEPARATION -->
+    <!-- QR GENERATION SCRIPT HIGH RESOLUTION ZOOM OPTIMIZED -->
     <script>
         const QR_PAYLOADS = {
             esewa: '{"eSewa_id":"9807648317","name":"Isul Kawari"}',
@@ -249,41 +255,26 @@
         };
 
         function renderQRCodes() {
-            const qrSize = 74;
+            // High resolution size for crisp scanning even at high zoom levels
+            const qrSize = 120;
 
             document.getElementById("qr-esewa").innerHTML = "";
             document.getElementById("qr-khalti").innerHTML = "";
             document.getElementById("qr-bank").innerHTML = "";
 
-            // Use pure black on pure white for the QR images to prevent color overlap and ensure 100% scannability
             const pureBlack = "#000000";
 
-            new QRCode(document.getElementById("qr-esewa"), {
-                text: QR_PAYLOADS.esewa,
+            const options = {
                 width: qrSize,
                 height: qrSize,
                 colorDark: pureBlack,
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
-            });
+            };
 
-            new QRCode(document.getElementById("qr-khalti"), {
-                text: QR_PAYLOADS.khalti,
-                width: qrSize,
-                height: qrSize,
-                colorDark: pureBlack,
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
-
-            new QRCode(document.getElementById("qr-bank"), {
-                text: QR_PAYLOADS.bank,
-                width: qrSize,
-                height: qrSize,
-                colorDark: pureBlack,
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
+            new QRCode(document.getElementById("qr-esewa"), { text: QR_PAYLOADS.esewa, ...options });
+            new QRCode(document.getElementById("qr-khalti"), { text: QR_PAYLOADS.khalti, ...options });
+            new QRCode(document.getElementById("qr-bank"), { text: QR_PAYLOADS.bank, ...options });
         }
 
         document.addEventListener("DOMContentLoaded", renderQRCodes);
