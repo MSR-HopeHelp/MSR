@@ -53,7 +53,7 @@
     </script>
 
     <!-- Client-Side QRCode.js Engine -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" xintegrity="sha512-CNgIRecGo7OffLvhbDirectC2NUN9C8483b3eT63a2+6w33fCj32pDqD5tE+4qU8x5lA15g5211b43950=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <style>
         :root {
@@ -255,7 +255,7 @@
             <div class="msr-pulse-ring"></div>
             <div class="msr-core-box">
                 <!-- PNG Logo Image in Preloader -->
-                <img src="logo.png" alt="MSR Logo">
+                <img src="logo.png" alt="MSR Logo">
                 <div class="msr-rising-spark"></div>
             </div>
         </div>
@@ -269,10 +269,9 @@
         <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
             
             <a href="#home" onclick="appState.navigateToSection('home')" class="flex items-center gap-2.5 focus:outline-none group">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-800 to-brand-950 flex items-center justify-center text-white shadow-md shadow-brand-900/20 group-hover:scale-105 transition-transform shrink-0 overflow-hidden p-1.5">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-800 to-brand-950 flex items-center justify-center text-white shadow-md shadow-brand-900/20 group-hover:scale-105 transition-transform shrink-0 overflow-hidden p-1.5">
                     <!-- PNG Logo Image in Header -->
                     <img src="logo.png" alt="MSR Logo" class="w-full h-full object-contain">
-                    
                 </div>
                 <div>
                     <span class="font-heading font-extrabold text-lg sm:text-xl text-slate-900 block leading-none tracking-tight">
@@ -1097,7 +1096,6 @@
                 stepMethod: "माध्यम",
                 stepQr: "QR",
                 
-                /* INSPIRING QUOTES (1 TO 20) */
                 quote1: "“तपाईंले आज गर्ने सानो दानले कसैको ठूलो आवश्यकता पूरा हुन्छ; तपाईंले बाँडेको सहयोगको माध्यमबाट ईश्वरले तपाईंको जीवनमा अझ धेरै बरकत र समृद्धि ल्याउनुहुन्छ।” 🤲❤️",
                 quote2: "“तपाईंले दिनुहुन्छ, कसैको कठिनाइ कम हुन्छ; तपाईंले बाँड्नुहुन्छ, ईश्वरले तपाईंको जीवनमा अझ धेरै दिनुहुन्छ।” ❤️🤲",
                 quote3Title: "राम्रो कर्म",
@@ -1226,7 +1224,6 @@
                 stepMethod: "Method",
                 stepQr: "QR",
                 
-                /* INSPIRING QUOTES (1 TO 20 IN ENGLISH) */
                 quote1: "“Your small donation today can fulfill someone’s great need; through the kindness you share, may God bring greater blessings and prosperity into your life.” 🤲❤️",
                 quote2: "“You give, someone’s hardship becomes lighter; you share, and God blesses your life with even more.” ❤️🤲",
                 quote3Title: "Good Deeds",
@@ -1345,7 +1342,6 @@
             latestSubmission: null,
 
             init() {
-                // Hide preloader smoothly once DOM is ready
                 const preloader = document.getElementById('page-preloader');
                 if (preloader) {
                     setTimeout(() => {
@@ -1564,7 +1560,6 @@
                     return;
                 }
 
-                // Add professional generous padding and distinct text padding for scannability
                 const padding = 40;
                 const topTextHeight = 65;
                 const paddedCanvas = document.createElement('canvas');
@@ -1572,22 +1567,18 @@
                 paddedCanvas.height = sourceCanvas.height + (padding * 2) + topTextHeight;
                 const pCtx = paddedCanvas.getContext('2d');
 
-                // Fill clean solid white background
                 pCtx.fillStyle = '#ffffff';
                 pCtx.fillRect(0, 0, paddedCanvas.width, paddedCanvas.height);
 
-                // Draw Method Name / Title at the Top with comfortable padding space
                 pCtx.fillStyle = '#166534';
                 pCtx.font = 'bold 18px Poppins, sans-serif';
                 pCtx.textAlign = 'center';
                 pCtx.fillText('MSR — ' + this.paymentMethod.toUpperCase() + ' QR', paddedCanvas.width / 2, 35);
 
-                // Draw Amount with padding separation
                 pCtx.fillStyle = '#17201a';
                 pCtx.font = 'bold 14px Inter, sans-serif';
                 pCtx.fillText(`${this.currency} ${this.amount.toLocaleString()}`, paddedCanvas.width / 2, 58);
 
-                // Draw the QR code image centered with wide white padding around it
                 pCtx.drawImage(sourceCanvas, padding, topTextHeight + 10);
 
                 const imageUrl = paddedCanvas.toDataURL("image/png");
@@ -1626,58 +1617,25 @@
 
                 document.getElementById('res-donation-id').textContent = generatedRef;
                 document.getElementById('res-donation-amt').textContent = `${this.currency} ${this.amount.toLocaleString()}`;
-                
-                // Clear and reset the recent region to form activities after Submit Donation Details with default amount 1000
-                document.getElementById('form-donor-submit').reset();
-                const qrTarget = document.getElementById('qrcode-canvas-target');
-                if (qrTarget) qrTarget.innerHTML = '';
-                this.region = 'nepal';
-                this.amount = 1000;
-                this.paymentMethod = 'esewa';
-                const customInput = document.getElementById('input-custom-amt-nepal');
-                if (customInput) customInput.value = '';
-                const customWrapper = document.getElementById('wrapper-custom-amt');
-                if (customWrapper) customWrapper.classList.add('hidden');
-
                 this.navigateToStep(6);
             },
 
             openWhatsAppNotification() {
                 if (!this.latestSubmission) return;
                 const sub = this.latestSubmission;
-
-                const message = encodeURIComponent(
-                    `*MSR — HOPE & HELP DONATION SUBMISSION*\n\n` +
-                    `Donation ID: ${sub.id}\n` +
-                    `Donor: ${sub.donorName}\n` +
-                    `Amount: ${sub.currency} ${sub.amount}\n` +
-                    `Region: ${sub.region.toUpperCase()}\n` +
-                    `Payment Method: ${sub.method.toUpperCase()}\n` +
-                    `Txn Ref: ${sub.txnId || 'N/A'}\n` +
-                    `Phone: ${sub.phone}\n` +
-                    `Email: ${sub.email || 'N/A'}\n` +
-                    `Status: PENDING_VERIFICATION`
-                );
-
-                window.open(`https://wa.me/${CONFIG.whatsappAdmin}?text=${message}`, '_blank');
-            },
-
-            resetFlow() {
-                this.amount = 1000;
-                this.region = 'nepal';
-                this.paymentMethod = 'esewa';
-                document.getElementById('form-donor-submit').reset();
-                const qrTarget = document.getElementById('qrcode-canvas-target');
-                if (qrTarget) qrTarget.innerHTML = '';
-                const customInput = document.getElementById('input-custom-amt-nepal');
-                if (customInput) customInput.value = '';
-                const customWrapper = document.getElementById('wrapper-custom-amt');
-                if (customWrapper) customWrapper.classList.add('hidden');
-                this.navigateToStep(1);
+                const text = `*New Donation Submission — MSR Hope & Help*%0A` +
+                             `• Ref ID: ${sub.id}%0A` +
+                             `• Donor Name: ${sub.donorName}%0A` +
+                             `• Phone: ${sub.phone}%0A` +
+                             `• Amount: ${sub.currency} ${sub.amount.toLocaleString()}%0A` +
+                             `• Method: ${sub.method.toUpperCase()}%0A` +
+                             `• Transaction ID: ${sub.txnId || 'N/A'}`;
+                
+                window.open(`https://wa.me/${CONFIG.whatsappAdmin}?text=${text}`, '_blank');
             }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', () => {
             appState.init();
         });
     </script>
